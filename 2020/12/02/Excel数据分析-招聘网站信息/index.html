@@ -20,18 +20,25 @@
     var CONFIG = {"hostname":"xcode361.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Excel 数据分析项目-数分招聘为例一、数据分析的基本步骤​    所有的数据分析可以大体上简化为以下几个步骤：明确问题-&gt;理解数据-&gt;数据清洗-&gt;数据分析或构建模型-&gt;数据可视化 本项目围绕上述几个步骤来进行 二、明确问题​    这个项目是假设一个年轻人小明想从事数分这个岗位，现在他当然想了解这些岗位，以便于准备简历，想知道从事该工作是否回报不错。现在已有数据是利用爬">
+  <meta name="description" content="Excel 数据分析项目-数分招聘为例一项目背景​    在学习完了王佩丰的excel之后，想将所学的实践运用，于是通过python爬虫得到数据分析招聘数据尝试进行数据分析。 二、数据分析的基本步骤​    所有的数据分析可以大体上简化为以下几个步骤：明确问题-&gt;理解数据-&gt;数据清洗-&gt;数据分析或构建模型-&gt;数据可视化 本项目围绕上述几个步骤来进行 三、明确问题​    这">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Excel数据分析-招聘网站信息">
 <meta property="og:url" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/index.html">
 <meta property="og:site_name" content="临渊の博客">
-<meta property="og:description" content="Excel 数据分析项目-数分招聘为例一、数据分析的基本步骤​    所有的数据分析可以大体上简化为以下几个步骤：明确问题-&gt;理解数据-&gt;数据清洗-&gt;数据分析或构建模型-&gt;数据可视化 本项目围绕上述几个步骤来进行 二、明确问题​    这个项目是假设一个年轻人小明想从事数分这个岗位，现在他当然想了解这些岗位，以便于准备简历，想知道从事该工作是否回报不错。现在已有数据是利用爬">
+<meta property="og:description" content="Excel 数据分析项目-数分招聘为例一项目背景​    在学习完了王佩丰的excel之后，想将所学的实践运用，于是通过python爬虫得到数据分析招聘数据尝试进行数据分析。 二、数据分析的基本步骤​    所有的数据分析可以大体上简化为以下几个步骤：明确问题-&gt;理解数据-&gt;数据清洗-&gt;数据分析或构建模型-&gt;数据可视化 本项目围绕上述几个步骤来进行 三、明确问题​    这">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/excel%E5%8E%9F%E5%A7%8B%E6%95%B0%E6%8D%AE.png">
 <meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E5%8C%96.png">
 <meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E8%96%AA%E6%B0%B4%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.png">
+<meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E7%AD%9B%E9%80%89%E6%A3%80%E6%9F%A5.png">
+<meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E9%94%99%E8%AF%AF%E6%95%B0%E6%8D%AE.png">
+<meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E6%8E%92%E5%BA%8F%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86.png">
+<meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E6%8E%92%E5%BA%8F.png">
+<meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E6%B8%85%E6%B4%97%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="https://xcode361.github.io/2020/12/02/Excel%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%8B%9B%E8%81%98%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF/images/%E9%97%AE%E9%A2%981.png">
 <meta property="article:published_time" content="2020-12-02T12:03:08.000Z">
-<meta property="article:modified_time" content="2020-12-02T15:17:50.294Z">
+<meta property="article:modified_time" content="2020-12-03T09:49:30.357Z">
 <meta property="article:author" content="郑嘉晖">
 <meta property="article:tag" content="Excel">
 <meta name="twitter:card" content="summary">
@@ -195,10 +202,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-12-02 20:03:08 / 修改时间：23:17:50" itemprop="dateCreated datePublished" datetime="2020-12-02T20:03:08+08:00">2020-12-02</time>
+              <time title="创建时间：2020-12-02 20:03:08" itemprop="dateCreated datePublished" datetime="2020-12-02T20:03:08+08:00">2020-12-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-03 17:49:30" itemprop="dateModified" datetime="2020-12-03T17:49:30+08:00">2020-12-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -220,22 +233,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Excel-数据分析项目-数分招聘为例"><a href="#Excel-数据分析项目-数分招聘为例" class="headerlink" title="Excel 数据分析项目-数分招聘为例"></a>Excel 数据分析项目-数分招聘为例</h1><h2 id="一、数据分析的基本步骤"><a href="#一、数据分析的基本步骤" class="headerlink" title="一、数据分析的基本步骤"></a>一、数据分析的基本步骤</h2><p>​    所有的数据分析可以大体上简化为以下几个步骤：<strong>明确问题-&gt;理解数据-&gt;数据清洗-&gt;数据分析或构建模型-&gt;数据可视化</strong></p>
+        <h1 id="Excel-数据分析项目-数分招聘为例"><a href="#Excel-数据分析项目-数分招聘为例" class="headerlink" title="Excel 数据分析项目-数分招聘为例"></a>Excel 数据分析项目-数分招聘为例</h1><h2 id="一项目背景"><a href="#一项目背景" class="headerlink" title="一项目背景"></a>一项目背景</h2><p>​    在学习完了王佩丰的excel之后，想将所学的实践运用，于是通过python爬虫得到数据分析招聘数据尝试进行数据分析。</p>
+<h2 id="二、数据分析的基本步骤"><a href="#二、数据分析的基本步骤" class="headerlink" title="二、数据分析的基本步骤"></a>二、数据分析的基本步骤</h2><p>​    所有的数据分析可以大体上简化为以下几个步骤：<strong>明确问题-&gt;理解数据-&gt;数据清洗-&gt;数据分析或构建模型-&gt;数据可视化</strong></p>
 <p>本项目围绕上述几个步骤来进行</p>
-<h2 id="二、明确问题"><a href="#二、明确问题" class="headerlink" title="二、明确问题"></a>二、明确问题</h2><p>​    这个项目是假设一个年轻人小明想从事数分这个岗位，现在他当然想了解这些岗位，以便于准备简历，想知道从事该工作是否回报不错。现在已有数据是利用爬虫爬取的招聘数分的原始数据。现在先明确问题，假设小明想知道以下几个问题：1、去哪个城市好找到工作 2、数分发展前途如何 3、薪水待遇怎么样，不同熟练度待遇是怎样的?</p>
-<h2 id="三理解数据"><a href="#三理解数据" class="headerlink" title="三理解数据"></a>三理解数据</h2><p><img src="images/excel%E5%8E%9F%E5%A7%8B%E6%95%B0%E6%8D%AE.png"></p>
+<h2 id="三、明确问题"><a href="#三、明确问题" class="headerlink" title="三、明确问题"></a>三、明确问题</h2><p>​    这个项目是假设一个年轻人小明想从事数分这个岗位，但是他对岗位不是很了解，现在先明确小明的问题，假设小明想知道以下几个问题：1、去哪个城市好找到工作 2、数分发展前途如何 3、薪水待遇怎么样，不同熟练度待遇是怎样的?</p>
+<h2 id="四、理解数据"><a href="#四、理解数据" class="headerlink" title="四、理解数据"></a>四、理解数据</h2><p><img src="images/excel%E5%8E%9F%E5%A7%8B%E6%95%B0%E6%8D%AE.png"></p>
 <p> 上图是原始数据，可以看到有数据有以下几个字段：公司、公司全民、公司id、公司简称、公司大小、职位等等字段，公司id可以唯一标识公司、职位id唯一标识职位，需要注意的是职位虽然是数据分析 但是各公司对数据分析要求不同，有的大数据分析、助理分析师就不是我们需要的数据，在后面数据清洗的时候需要注意。</p>
-<h2 id="四-清洗数据"><a href="#四-清洗数据" class="headerlink" title="四 清洗数据"></a>四 清洗数据</h2><p>数据清洗是删除一些我们不需要的数据一遍我们进行更好的分析，数据清洗一般可以从以下几个步骤来进行：</p>
+<h2 id="五、清洗数据"><a href="#五、清洗数据" class="headerlink" title="五、清洗数据"></a>五、清洗数据</h2><p>数据清洗是删除一些我们不需要的数据一遍我们进行更好的分析，数据清洗一般可以从以下几个步骤来进行：</p>
 <p><strong>选择子集-&gt;列名重命名-&gt;删除重复值-&gt;缺失值处理-&gt;一致化处理-&gt;数据排序-&gt;异常值处理</strong></p>
-<p>第一步 选择子集 意思是选择我们需要的字段 并不是所有字段都是需要的，比如公司全名和公司id保留一个即可。通常在excel中的做法就是<strong>隐藏数据</strong>(开始-&gt;格式当中) </p>
-<p>第二步 列名重命名 是为了方便自己进行分析的 比如把中文变成英文在某些场合下就不用考虑编码问题</p>
-<p>第三步 删除重复值  这里我们可以通过职位id来删除重复值 以及公司id删除重复值。 excel中操作是数据中的<strong>删除重复项</strong></p>
-<p>第四步 缺失值处理  在excel右下角有计数 比如职位id显示5033条 而城市只有5011条 说明存在缺失数据，对于缺失值处理通常有四种做法 一、通过<strong>人工填写</strong>(适用于缺失值比较少的情况)，二、<strong>直接删掉</strong>(数据量很大，只有少量数据缺失时) 三、用<strong>平均值代替</strong>缺失值 四、根据<strong>统计模型代替</strong>缺失值   excel中可以通过定位空白处然后填充</p>
-<p>第五步 一致化数据处理  一致化的意思是在某个字段当中出现多种格式的情况 ，或者说格式不好处理时，我们要进行统一规范化。比如下图公司所属领域 有的是一个领域，有的是两个领域 因此我们需要在excel中进行<strong>分列处理</strong></p>
+<p><strong>第一步</strong> 选择子集 意思是选择我们需要的字段 并不是所有字段都是需要的，比如公司全名和公司id保留一个即可。通常在excel中的做法就是<strong>隐藏数据</strong>(开始-&gt;格式当中) </p>
+<p><strong>第二步</strong> 列名重命名 是为了方便自己进行分析的 比如把中文变成英文在某些场合下就不用考虑编码问题</p>
+<p><strong>第三步</strong> 删除重复值  这里我们可以通过职位id来删除重复值 以及公司id删除重复值。 excel中操作是数据中的<strong>删除重复项</strong></p>
+<p><strong>第四步</strong> 缺失值处理  在excel右下角有计数 比如职位id显示5033条 而城市只有5011条 说明存在缺失数据，对于缺失值处理通常有四种做法 一、通过<strong>人工填写</strong>(适用于缺失值比较少的情况)，二、<strong>直接删掉</strong>(数据量很大，只有少量数据缺失时) 三、用<strong>平均值代替</strong>缺失值 四、根据<strong>统计模型代替</strong>缺失值   excel中可以通过定位空白处然后填充</p>
+<p><strong>第五步</strong> 一致化数据处理  一致化的意思是在某个字段当中出现多种格式的情况 ，或者说格式不好处理时，我们要进行统一规范化。比如下图公司所属领域 有的是一个领域，有的是两个领域 因此我们需要在excel中进行<strong>分列处理</strong></p>
 <p><img src="images/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E5%8C%96.png"></p>
 <p>以及薪水显示是文本格式我们后续对其进行统计时需要将其变成数值格式</p>
 <p>这里我们以薪水为例说明如何进行数据处理</p>
 <p><img src="images/%E8%96%AA%E6%B0%B4%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.png"></p>
+<p>这个该如何处理呢？首先我们要得到最低薪水和最高薪水 如7k-9k最低薪水是7最高是9 然后进行将字符转化为数值再计算平均值。</p>
+<p>在excel中如何处理呢？ 7k-9k 这是个字符串所以我们首先需要要找到需要截取的位置然后再用字符串截取函数截取，我们使用excel中的文本函数find()找到k所在位置然后用截取函数 left right mid函数进行截取。</p>
+<p>通过以下两个函数我们能截取到最低薪水与最高薪水</p>
+<p>=LEFT(P2,FIND(“k”,P2,1)-1)</p>
+<p>=MID(P2,FIND(“-“,P2,1)+1,LEN(P2)-FIND(“-“,P2,1)-1)</p>
+<p>然后通过筛选检查截取函数是否成功</p>
+<p><img src="images/%E7%AD%9B%E9%80%89%E6%A3%80%E6%9F%A5.png"></p>
+<p>可以看到存在错误的数据</p>
+<p><img src="images/%E9%94%99%E8%AF%AF%E6%95%B0%E6%8D%AE.png"></p>
+<p>产生错误数据的原因是薪水写的是15k以上 这样我们处理直接将最高薪水等于最低薪水即可，同样的对于最低薪水也存在这样的问题 是因为最低薪水中k变成大写了 用excel中的查找替换即可</p>
+<p>下一步求平均薪水，由于得到的是字符串 使用平均值函数=average()会出现错误，我们可以通过以下几种方式解决字符串转数字的问题：一、通过value函数 二、使用选择性粘贴 三、使用分列 四 、+0即可</p>
+<p><strong>第六步</strong>  进行排序 帮助我们更好的了解数据，也能方便后续的异常值处理  excel中提供了排序的功能,这里我们以平均值的降序结果展示（excel中选择数据-&gt;筛选进行处理）</p>
+<p><img src="images/%E6%8E%92%E5%BA%8F%E7%BB%93%E6%9E%9C.png"></p>
+<p><strong>第七步</strong> 异常值处理  通常使用excel中数据透视表来完成这一项工作</p>
+<p>数据透视表的原理：数据分组(split)-&gt;应用函数(apply)-&gt;组合结果(combine)</p>
+<p>这里以职业名称为例进行数据透视</p>
+<p><img src="images/%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86.png"></p>
+<p>这里对每项职业进行了计数 可以看到有些岗位并不是数据分析 ，进行排序筛选掉异常的值，比如大数据开发工程师以及需求分析师</p>
+<p><img src="images/%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E6%8E%92%E5%BA%8F.png"></p>
+<p>在excel中筛选的方式是：如果是数据分析、分析师之类的标记为是否则标记为否，最后删除掉标记为否的，公式如下</p>
+<p>=IF(COUNT(FIND({“数据运营”,”数据分析”,“分析师”},M41)),”是”,”否”)</p>
+<p>清洗结果如下</p>
+<p><img src="images/%E6%B8%85%E6%B4%97%E7%BB%93%E6%9E%9C.png"></p>
+<h2 id="六-数据分析或建模"><a href="#六-数据分析或建模" class="headerlink" title="六 数据分析或建模"></a>六 数据分析或建模</h2><p>现在清洗完了数据该进行分析或者建模了，excel中用数据透视表进行</p>
+<p><strong>问题1：在哪些城市找到数据分析师工作的机会比较大？应该去哪个城市工作？</strong></p>
+<p>解决办法：插入选项卡——数据透视表——勾选”城市“；列：工作年限要求；行：城市； 计算项值：计数项：城市——点击“计数项：城市”行标签——其他排序选项——降序排序 计数项：城市（即按降序对”城市“排序）</p>
+<p><img src="images/%E9%97%AE%E9%A2%981.png"></p>
+<p>从图中可以直观的看到结果。可以通过排序以及值显示方式中的行百分比、列百分比进行显示</p>
+<p><strong>问题2：该行业的平均薪酬如何？</strong></p>
+<p>可以通过excel中数据分析功能实现</p>
+<p>解决办法：文件——选项——加载项——Excel加载项 转到——<strong>分析工具库</strong>——数据选项卡——数据分析——描述统计——</p>
 
     </div>
 
@@ -336,7 +381,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Excel-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%A1%B9%E7%9B%AE-%E6%95%B0%E5%88%86%E6%8B%9B%E8%81%98%E4%B8%BA%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">Excel 数据分析项目-数分招聘为例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.</span> <span class="nav-text">一、数据分析的基本步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%98%8E%E7%A1%AE%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">二、明确问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">三理解数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B-%E6%B8%85%E6%B4%97%E6%95%B0%E6%8D%AE"><span class="nav-number">1.4.</span> <span class="nav-text">四 清洗数据</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Excel-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E9%A1%B9%E7%9B%AE-%E6%95%B0%E5%88%86%E6%8B%9B%E8%81%98%E4%B8%BA%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">Excel 数据分析项目-数分招聘为例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">一项目背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.</span> <span class="nav-text">二、数据分析的基本步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%98%8E%E7%A1%AE%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">三、明确问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE"><span class="nav-number">1.4.</span> <span class="nav-text">四、理解数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%B8%85%E6%B4%97%E6%95%B0%E6%8D%AE"><span class="nav-number">1.5.</span> <span class="nav-text">五、清洗数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%88%96%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.6.</span> <span class="nav-text">六 数据分析或建模</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
