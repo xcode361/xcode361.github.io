@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"xcode361.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="sql基础知识回顾(DQL)一、检索数据检索数据需要掌握以下几点：  检索全部： SELECT * FROM table；  检索多列：以，分隔 也叫做投影查询  检索不同的值 SELECT DISTINCT 列名 FROM 表；  限制检索结果：不同数据库实现不同 如sql server用top，mysql中用limit a offset b 表示从b行开始包括b行(从0开始计数)检索a行数据">
+  <meta name="description" content="sql基础知识回顾一、检索数据检索数据需要掌握以下几点：  检索全部： SELECT * FROM table；  检索多列：以，分隔 也叫做投影查询  检索不同的值 SELECT DISTINCT 列名 FROM 表；  限制检索结果：不同数据库实现不同 如sql server用top，mysql中用limit a offset b 表示从b行开始包括b行(从0开始计数)检索a行数据 如   S">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql知识回顾">
 <meta property="og:url" content="https://xcode361.github.io/2020/12/04/sql%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/index.html">
 <meta property="og:site_name" content="临渊の博客">
-<meta property="og:description" content="sql基础知识回顾(DQL)一、检索数据检索数据需要掌握以下几点：  检索全部： SELECT * FROM table；  检索多列：以，分隔 也叫做投影查询  检索不同的值 SELECT DISTINCT 列名 FROM 表；  限制检索结果：不同数据库实现不同 如sql server用top，mysql中用limit a offset b 表示从b行开始包括b行(从0开始计数)检索a行数据">
+<meta property="og:description" content="sql基础知识回顾一、检索数据检索数据需要掌握以下几点：  检索全部： SELECT * FROM table；  检索多列：以，分隔 也叫做投影查询  检索不同的值 SELECT DISTINCT 列名 FROM 表；  限制检索结果：不同数据库实现不同 如sql server用top，mysql中用limit a offset b 表示从b行开始包括b行(从0开始计数)检索a行数据 如   S">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-03T19:21:00.000Z">
-<meta property="article:modified_time" content="2020-12-04T15:18:42.500Z">
+<meta property="article:modified_time" content="2020-12-07T12:46:20.769Z">
 <meta property="article:author" content="郑嘉晖">
 <meta property="article:tag" content="sql基础回顾">
 <meta name="twitter:card" content="summary">
@@ -126,17 +126,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">4</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
 
   </li>
   </ul>
@@ -191,10 +191,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-12-04 03:21:00 / 修改时间：23:18:42" itemprop="dateCreated datePublished" datetime="2020-12-04T03:21:00+08:00">2020-12-04</time>
+              <time title="创建时间：2020-12-04 03:21:00" itemprop="dateCreated datePublished" datetime="2020-12-04T03:21:00+08:00">2020-12-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-07 20:46:20" itemprop="dateModified" datetime="2020-12-07T20:46:20+08:00">2020-12-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -216,7 +222,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="sql基础知识回顾-DQL"><a href="#sql基础知识回顾-DQL" class="headerlink" title="sql基础知识回顾(DQL)"></a>sql基础知识回顾(DQL)</h1><h2 id="一、检索数据"><a href="#一、检索数据" class="headerlink" title="一、检索数据"></a>一、检索数据</h2><p>检索数据需要掌握以下几点：</p>
+        <h1 id="sql基础知识回顾"><a href="#sql基础知识回顾" class="headerlink" title="sql基础知识回顾"></a>sql基础知识回顾</h1><h2 id="一、检索数据"><a href="#一、检索数据" class="headerlink" title="一、检索数据"></a>一、检索数据</h2><p>检索数据需要掌握以下几点：</p>
 <ul>
 <li><p>检索全部： <code>SELECT * FROM table；</code></p>
 </li>
@@ -294,14 +300,14 @@
 <p><code>SELECT cust_contact FROM Customers WHERE cust_contact LIKE &#39;[JM]%&#39; ORDER BY cust_contact;</code></p>
 <p>可以匹配的字符是 Jim John Michelle之类</p>
 <h2 id="四、创建计算字段"><a href="#四、创建计算字段" class="headerlink" title="四、创建计算字段"></a>四、创建计算字段</h2><p>​    计算字段是为了检索出转换、计算或格式化过的数据，而不仅仅是检索出的数据的数据，比如存储了物品的价格和数量，但是需要的是物品的总价格。</p>
-<p>常见的计算字段是：拼接字段、使用别名、执行算数计算</p>
+<p>常见的计算字段是：<strong>拼接字段、使用别名、执行算数</strong>计算</p>
 <ul>
 <li>拼接字段：拼接字段通常采用的是 + 或者||或者函数Contact实现，要看具体的数据库实现方式</li>
 </ul>
 <p><code>SELECT name + &#39;(&#39; +address + &#39;)&#39; FROM customer</code> </p>
 <p>结果可能是下面这样的：jim      (北京)  因为许多数据库会保存列宽 所以需要去掉这些空格 使用SQL中的RTRIM()函数实现</p>
 <ul>
-<li><p> 使用别名 使用AS 例如：<code>SELECT name + &#39;(&#39; +address + &#39;)&#39;    AS  info  FROM customer</code></p>
+<li><p> 使用别名 使用AS 例如：<code>SELECT name + &#39;(&#39; +address + &#39;)&#39;  AS  info  FROM customer</code></p>
 </li>
 <li><p>执行算数计算：使用+ - * / 进行算数运算 </p>
 <p><code>SELECT id,quantity,price,quantity*price as expanded_price FROM items</code> </p>
@@ -316,7 +322,120 @@
 <p>3.处理日期和时间</p>
 <p>4.返回DBMS正使用的特殊信息(如返回用户登录信息)的系统函数</p>
 <p>以上都可以很方便的查到就略过</p>
-<h2 id="六、汇总数据"><a href="#六、汇总数据" class="headerlink" title="六、汇总数据"></a>六、汇总数据</h2>
+<h2 id="六、聚合与分组"><a href="#六、聚合与分组" class="headerlink" title="六、聚合与分组"></a>六、聚合与分组</h2><p>通常我们需要汇总数据，而不用实际将其检索出来。sql给了以下5中聚合函数：AVG()、COUNT()、MAX()、MIN()、SUM( )</p>
+<p>**AVG()**函数显然是用来统计平均值的：<code>SELECT AVG(price) AS avg_price FROM Product;</code></p>
+<p>AVG函数只用于单个列,AVG()只能用来确定数值列的平均值，列名必须作为函数参数给出。为获得多个列的平均值必须使用多个AVG()。</p>
+<p>**COUNT()**函数: 有两种使用方式</p>
+<p> 1、对表中所有行计数，空值(NULL)和非空值 都会计入 </p>
+<p><code>SELECT COUNT(*) AS num_cust FROM Customers;</code> 所有行都进行计数不管表列包含的是空值还是非空值</p>
+<p> 2、使用COUNT(column)对指定列中具有值的行进行计数，忽略NULL值。</p>
+<p><code>SELECT COUNT(cust_email) AS num_cust FROM Customers;</code></p>
+<p>**MAX()**函数：MAX()返回指定列的最大值,忽略值为NULL的行。</p>
+<p><code>SELECT MAX(price) AS max_price FROM  Products;</code></p>
+<p>**MIN()**函数的功能正好与MAX()相反 其他都是一样的</p>
+<p>**SUM()**函数用来返回指定列值的和(总计) ,忽略列值为NULL的行</p>
+<p><code>SELECT SUM(quantity) AS items_ordered FROM  OrderItems WHERE order_num=20005;</code></p>
+<p>以上聚集函数都可以指定是不是包含不同的值 可以选择是否指定 DISTINCT参数</p>
+<p><code>SELECT AVG(DISTINCT price) AS avg_price FROM Products WHERE id=&#39;DL01&#39;</code></p>
+<p>DISTINCT不能用于COUNT(*) 但是可以用于COUNT() 另外DISTINCT()用于MIN和MAX 是没有意义的，因为最大最小值本身就是考虑不同值得</p>
+<p>在使用聚集函数的时候可以使用where 子句筛选出某个特定的，要特别注意：如果聚合查询的<code>WHERE</code>条件没有匹配到任何行，<code>COUNT()</code>会返回0，而<code>SUM()</code>、<code>AVG()</code>、<code>MAX()</code>和<code>MIN()</code>会返回<code>NULL</code> 。但是通常我们需要的是将数据分成几组后 再查看其聚集情况 。</p>
+<p><code>SELECT id,COUNT(*) AS num_prods FROM Products GROUP BY  id;</code></p>
+<p>会返回以id分组的统计情况 ，比如说id为1的有3个 id为2的有4个之类。在使用group by之后依然可以使用having进行过滤，order by进行排序 但是需要注意的是有严格的顺序 <strong>select from where group by having order by</strong> </p>
+<p><code>SELECT  order_num,COUNT(*) AS items FROM OrderItems  GROUP BY order_num HAVING COUNT(*)&gt;=3 ORDER BY items,order_num</code></p>
+<p>该语句的含义就是按订单编号分组 查询订单编号和数量 将数量大于3的筛选出来最后顺序按照订单数量排序</p>
+<p>另外可以i进行多列分组：<code>SELECT class_id, gender, COUNT(*) num FROM students GROUP BY class_id, gender;</code></p>
+<p>如果同时使用where 和group by等是优先对行进行筛选 筛选完之后的数据再进入分组</p>
+<h2 id="七、使用子查询"><a href="#七、使用子查询" class="headerlink" title="七、使用子查询"></a>七、使用子查询</h2><p>子查询 ：嵌套在查询中的查询  子查询一般有两种用法：1、嵌套在其他查询中作为筛选条件 2、作为计算字段</p>
+<p>1举例 要检索出订购物品RGAN01的所有顾客    可以分为以下几个步骤解决 ：首先检索包含物品RGAN01的所有订单的编号，再检索出这些订单编号的所有顾客id ，最后检索上一步检索出的id的顾客信息</p>
+<p>分布进行的话：</p>
+<p>1、<code>SELECT order_num FROM OrderItems WHERE id=&#39;RGAN01&#39;</code>;   假如返回的是20007 20008 </p>
+<p>2、<code>SELECT id FROM Orders WHERE order_num IN(&#39;20007&#39;,&#39;20008&#39;);</code> 假如这个返回的是 1004 1005</p>
+<p>3、SELECT cust_name,cust_contact FROM Customers WHERE cust_id IN(‘1004’,’1005’) </p>
+<p>如果采用子查询一步到位：</p>
+<p><code>SELECT cust_name,cust_contact FROM Customers WHERE cust_id IN(</code></p>
+<p><code>SELECT id FROM Orders WHERE order_num IN(</code></p>
+<p><code>SELECT order_num FROM OrderItems WHERE id=&#39;RGAN01&#39;</code></p>
+<p><code>)</code></p>
+<p><code>);</code></p>
+<p>NOTE: 作为子查询的select 语句只能查询单个列。</p>
+<p>第二种用途：作为计算字段使用子查询</p>
+<p>比如现在需要显示Customers表中每个顾客的订单总数，订单与对应的顾客id在Orders表中，意思就是Customer表中有用户姓名、用户地址、用户的id 而订单的id 在Orders表中</p>
+<p><code>SELECT cust_name,cust_state,(SELECT COUNT(*) FROM Orders WHERE Order.cust_id=Customers.cust_id) AS order FROM Customers ORDER BY cust_name;</code></p>
+<h2 id="八、多表查询与联结查询"><a href="#八、多表查询与联结查询" class="headerlink" title="八、多表查询与联结查询"></a>八、多表查询与联结查询</h2><p>SELECT查询不但可以从一张表查询数据，还可以从多张表同时查询数据</p>
+<p><code>SELECT * FROM students,classes;</code> 使用这种查询方式结果返回的是<strong>笛卡尔积</strong>，有时也称作<strong>叉联结</strong>，用直白的话来说就是行是相当于乘积后的结果 列相当于加和后的结果，比如上述sql语句可以返回这样的字段：</p>
+<table>
+<thead>
+<tr>
+<th align="left">id</th>
+<th align="left">class_id</th>
+<th align="left">name</th>
+<th align="left">gender</th>
+<th align="left">score</th>
+<th align="left">id</th>
+<th align="left">name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">小明</td>
+<td align="left">M</td>
+<td align="left">90</td>
+<td align="left">1</td>
+<td align="left">一班</td>
+</tr>
+</tbody></table>
+<p>注意这里有两个id来自于不同的表，可以给表起别名：</p>
+<p><code>SELECT</code><br>    <code>s.id sid,</code><br>    <code>s.name,</code><br>    <code>s.gender,</code><br>    <code>s.score,</code><br>    <code>c.id cid,</code><br>    <code>c.name cname</code><br><code>FROM students s, classes c</code><br><code>WHERE s.gender = &#39;M&#39; AND c.id = 1;</code></p>
+<p>我们现在使用的联结称为等值联结、基于两个表之间的相等测试，这种联结也称为<strong>内联结(inner join)</strong>,用法如下：</p>
+<p><code>SELECT s.id, s.name, s.class_id, c.name class_name, s.gender, s.score</code><br><code>FROM students s</code><br><code>INNER JOIN classes c</code><br><code>ON s.class_id = c.id;</code></p>
+<p>这种用法就等同于 <code>SELECT s.id,s.name,s.class_id,c.name class_name,s.gender, s.score FROM students s,classes c WHERE c.id=s.class_id</code> </p>
+<p>通过联结方式来代替子查询一般是效率比较高的，但是要注意的是联结的表不能太多。</p>
+<p>除了内联结 还有自联结、自然联结、外联结等方式 下面介绍：</p>
+<p><strong>自联结</strong>可以简单的认为就是自己与自己联结使用别名来区分，比如下面的代码：</p>
+<p>SELECT c1.id,c1.name ,c1.contact FROM Customer AS c1,Customer AS c2 WHERE c1.name=c2.name AND c2.contact=’JIM Jones’</p>
+<p><strong>自然联结</strong></p>
+<p>自然联结相对于内联结而言就是相同的列不会被检索出来，需要自己确定 ，通常而言联结都会选择一个作为主表结果集然后进行联结工作，自然联结可以认为是这样的：SELECT C.*,O.order_num,O.date……  就是主表给出所有列联结的表给出子集</p>
+<p><strong>外联结</strong> </p>
+<p>外联结是用来包含那些没有关联行的行,如下图所示</p>
+<table>
+<thead>
+<tr>
+<th align="left">id</th>
+<th align="left">name</th>
+<th align="left">class_id</th>
+<th align="left">class_name</th>
+<th align="left">gender</th>
+<th align="left">score</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">NULL</td>
+<td align="left">NULL</td>
+<td align="left">NULL</td>
+<td align="left">四班</td>
+<td align="left">NULL</td>
+<td align="left">NULL</td>
+</tr>
+</tbody></table>
+<p>外联结又分为LEFT OUTER JOIN、RIGHT OUT JOIN、以及FULL OUTER JOIN</p>
+<p>right就是包含outer join右边表的所有行即使不关联，同理left就是包含out join左边表的所有行，full 当然是包含两个表所有行</p>
+<p>join的语法可以认为是下面这种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ... FROM tableA ??? JOIN tableB ON tableA.column1 &#x3D; tableB.column2;</span><br></pre></td></tr></table></figure>
+
+<p>其实用venn图可以很好理解 内联结、左外联结、右联结的区别</p>
+<h2 id="九、组合查询"><a href="#九、组合查询" class="headerlink" title="九、组合查询"></a>九、组合查询</h2><p>组合查询很简单就相当于一个并集将多个select语句查询的结果合并起来，需要注意的是select必须包含形同的列、表达式或聚集函数，union会自动取消重复的行 如果需要使用union all即可。比较简单省略了</p>
+<h2 id="十、case-when"><a href="#十、case-when" class="headerlink" title="十、case when"></a>十、case when</h2><p>case when 也是一个简单的东西 就是 相当于一个if 判断语句 ，举个例子一个人的薪水大于200000高薪，100000一般薪   </p>
+<p>下面是case语句写法</p>
+<p><code>SELECT name,</code></p>
+<p><code>CASE</code> </p>
+<p><code>WHEN salary&gt;200000 THEN &#39;高薪&#39;</code></p>
+<p><code>WHEN salary&gt;=100000 THEN &#39;一般薪&#39;</code></p>
+<p><code>ELSE &#39;需要加薪&#39;</code></p>
+<p><code>END AS salary_type</code></p>
+<p><code>from employee;</code></p>
+<p>when给出条件 else 可要可不要 最后</p>
+
     </div>
 
     
@@ -426,7 +545,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE-DQL"><span class="nav-number">1.</span> <span class="nav-text">sql基础知识回顾(DQL)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">一、检索数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">二、排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%AD%9B%E9%80%89-%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.3.</span> <span class="nav-text">三、筛选(条件查询)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%88%9B%E5%BB%BA%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5"><span class="nav-number">1.4.</span> <span class="nav-text">四、创建计算字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.</span> <span class="nav-text">五、使用函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE"><span class="nav-number">1.6.</span> <span class="nav-text">六、汇总数据</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.</span> <span class="nav-text">sql基础知识回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">一、检索数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">二、排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%AD%9B%E9%80%89-%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.3.</span> <span class="nav-text">三、筛选(条件查询)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%88%9B%E5%BB%BA%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5"><span class="nav-number">1.4.</span> <span class="nav-text">四、创建计算字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.</span> <span class="nav-text">五、使用函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%81%9A%E5%90%88%E4%B8%8E%E5%88%86%E7%BB%84"><span class="nav-number">1.6.</span> <span class="nav-text">六、聚合与分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E4%BD%BF%E7%94%A8%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.7.</span> <span class="nav-text">七、使用子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E4%B8%8E%E8%81%94%E7%BB%93%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.8.</span> <span class="nav-text">八、多表查询与联结查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.9.</span> <span class="nav-text">九、组合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81case-when"><span class="nav-number">1.10.</span> <span class="nav-text">十、case when</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -442,20 +561,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
