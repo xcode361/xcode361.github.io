@@ -22,9 +22,9 @@
 
   <meta name="description" content="不断进步">
 <meta property="og:type" content="website">
-<meta property="og:title" content="临渊の博客">
+<meta property="og:title" content="郑嘉晖の博客">
 <meta property="og:url" content="https://xcode361.github.io/page/2/index.html">
-<meta property="og:site_name" content="临渊の博客">
+<meta property="og:site_name" content="郑嘉晖の博客">
 <meta property="og:description" content="不断进步">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="郑嘉晖">
@@ -43,7 +43,7 @@
   };
 </script>
 
-  <title>临渊の博客</title>
+  <title>郑嘉晖の博客</title>
   
 
 
@@ -94,7 +94,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">临渊の博客</h1>
+      <h1 class="site-title">郑嘉晖の博客</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">记录成长</p>
@@ -128,12 +128,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a>
 
   </li>
   </ul>
@@ -165,6 +165,726 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/09/pandas100%E9%81%93%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/09/pandas100%E9%81%93%E9%A2%98/" class="post-title-link" itemprop="url">pandas100道题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-09 16:58:58" itemprop="dateCreated datePublished" datetime="2020-12-09T16:58:58+08:00">2020-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-21 19:54:45" itemprop="dateModified" datetime="2021-03-21T19:54:45+08:00">2021-03-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="练习1"><a href="#练习1" class="headerlink" title="练习1"></a>练习1</h4><p>chipo数据结构长这样</p>
+<table>
+<thead>
+<tr>
+<th align="right">order_id</th>
+<th align="right">quantity</th>
+<th align="right">item_name</th>
+<th align="right">choice_description</th>
+<th align="right">item_price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<p>1、被下单最多的商品是什么？ 比如求出几个</p>
+<p>chipo.groupby(‘item_name’).sum().sort_values(by=’quantity’,ascending=False).reset_index()[0:3]</p>
+<p>注意这里需要reset_index()将其变成dataframe对象</p>
+<p>2、一共有多少种商品被下单<br>print(chipo[‘item_name’].nunique())<br>每个商品各被下单了多少次<br>print(chipo[‘item_name’].value_counts().head(3))<br>一共有多少商品被下单<br>print(chipo[‘quantity’].sum())</p>
+<p>这些是常用函数</p>
+<p>3、item_price是字符型将其转化为浮点型</p>
+<p>dollarizer = lambda x: float(x[1:-1])<br>chipo[‘item_price’] = chipo[‘item_price’].apply(dollarizer)</p>
+<p>另一种方法 ：chipo[‘item_price’]=chipo[‘item_price’].str.replace(“$”,””).astype(“float”)</p>
+<p>4、在该数据集对应的时期内，收入(revenue)是多少 </p>
+<p>显然收入=price*quantity然后加总起来</p>
+<p>chipo[‘sub_total’]=round(chipo[‘quantity’]*chipo[‘item_price’],2)<br>chipo[‘sub_total’].sum()</p>
+<p>5、在该数据集中一共有多少订单 和一共有多少种商品类似<br>chipo[‘order_id’].nunique()</p>
+<p>6、每一单的平均总价是多少</p>
+<p>平均总价=收入/订单数</p>
+<p>(chipo[‘sub_total’].sum())/(chipo[‘order_id’].nunique())</p>
+<p>另一种方法 </p>
+<p>chipo[[‘order_id’,’sub_total’]].groupby(by=[‘order_id’]<br>).agg({‘sub_total’:’sum’})[‘sub_total’].mean()</p>
+<h4 id="练习2-数据过滤与排序"><a href="#练习2-数据过滤与排序" class="headerlink" title="练习2 数据过滤与排序"></a>练习2 数据过滤与排序</h4>
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/" class="post-title-link" itemprop="url">sql面试50题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-08 02:00:24" itemprop="dateCreated datePublished" datetime="2020-12-08T02:00:24+08:00">2020-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-20 02:39:06" itemprop="dateModified" datetime="2020-12-20T02:39:06+08:00">2020-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">sql刷题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="sql面试50题-来自猴子数据分析"><a href="#sql面试50题-来自猴子数据分析" class="headerlink" title="sql面试50题 来自猴子数据分析"></a>sql面试50题 来自猴子数据分析</h1><p>首先表的关系明确下来 ：</p>
+<p><img src="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/1.jpg"></p>
+<h2 id="简单查询部分"><a href="#简单查询部分" class="headerlink" title="简单查询部分"></a>简单查询部分</h2><p>1.查询姓猴的学生名单、最后一个字带猴的、查询姓名中带猴的</p>
+<p>解决思路：明显是使用通配符筛选即可 通配符有% _  []</p>
+<p>代码：</p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;猴%&#39;;</code></p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;%猴&#39;;</code></p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;%猴%&#39;;</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">网页的逻辑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-07 21:00:35" itemprop="dateCreated datePublished" datetime="2020-12-07T21:00:35+08:00">2020-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-09 17:03:10" itemprop="dateModified" datetime="2020-12-09T17:03:10+08:00">2020-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="网页的逻辑-什么-DOM-JSON-AJAX"><a href="#网页的逻辑-什么-DOM-JSON-AJAX" class="headerlink" title="网页的逻辑-什么 DOM,JSON,AJAX"></a>网页的逻辑-什么 DOM,JSON,AJAX</h1><h2 id="一、前后端是这个样子的"><a href="#一、前后端是这个样子的" class="headerlink" title="一、前后端是这个样子的"></a>一、前后端是这个样子的</h2><p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/1.png"></p>
+<p>后端负责数据存储与软件交互的逻辑 软件交互的意思是比如给视频点了个赞 然后服务器会将其排序到前面 类似这样的逻辑</p>
+<h2 id="二、什么是-DOM"><a href="#二、什么是-DOM" class="headerlink" title="二、什么是 DOM"></a>二、什么是 DOM</h2><p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/2.png"></p>
+<p>我们对服务器发送了一个request 然后服务器会返回一个response 里面有html代码 浏览器会将其解析 为dom树 最后进行呈现 渲染</p>
+<p>DOM树结构如下图</p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/3.png"></p>
+<h2 id="三、JAVASCRIPT的作用：使用JavaScript控制DOM"><a href="#三、JAVASCRIPT的作用：使用JavaScript控制DOM" class="headerlink" title="三、JAVASCRIPT的作用：使用JavaScript控制DOM"></a>三、JAVASCRIPT的作用：使用JavaScript控制DOM</h2><p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/4.png"></p>
+<p>案例</p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/5.png"></p>
+<p>初始呈现是下图所示</p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/6.png"></p>
+<p>通过id进行修改</p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/7.png"></p>
+<p>同样的可以通过其他方式进行修改</p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/8.png"></p>
+<p>总而言之，JavaScript就是通过改变dom树从而改变网页展示的结果</p>
+<h2 id="四、JSON：一种轻量级的数据格式"><a href="#四、JSON：一种轻量级的数据格式" class="headerlink" title="四、JSON：一种轻量级的数据格式"></a>四、JSON：一种轻量级的数据格式</h2><p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/9.png"></p>
+<p>通过服务器获取json数据之后然后再渲染成页面<img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/10.png"></p>
+<h2 id="五、在js中可以将json转为js对象从而改变dom树然后呈现渲染"><a href="#五、在js中可以将json转为js对象从而改变dom树然后呈现渲染" class="headerlink" title="五、在js中可以将json转为js对象从而改变dom树然后呈现渲染"></a>五、在js中可以将json转为js对象从而改变dom树然后呈现渲染</h2><p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/11.png"></p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/12.png"></p>
+<h2 id="六、AJAX-不是一种编程语言而是一系列技术"><a href="#六、AJAX-不是一种编程语言而是一系列技术" class="headerlink" title="六、AJAX 不是一种编程语言而是一系列技术"></a>六、AJAX 不是一种编程语言而是一系列技术</h2><p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/13.png"></p>
+<p>传统的方式：通过重新传送表单对整个页面进行加载 会给一个新的html 是同步的</p>
+<p>而AJAX就是指发送request然后获得json数据 然后JavaScript通过动态改变DOM然后获得新网页</p>
+<p>案例</p>
+<p>在[<a target="_blank" rel="noopener" href="http://jsonplaceholder.typicode.com/posts]%E7%BD%91%E5%9D%80%E5%8F%AF%E8%8E%B7%E5%BE%97%E8%AE%B8%E5%A4%9Ajson%E6%95%B0%E6%8D%AE">http://jsonplaceholder.typicode.com/posts]网址可获得许多json数据</a></p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/14.png"></p>
+<p>然后有一个html代码 里面写了两函数分别是加载json 展示json数据</p>
+<p>在innerhtml中改变了 最后展示结果就是AJAX DEMO并不会改变</p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/15.png"></p>
+<p><img src="/2020/12/07/%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%BB%E8%BE%91/16.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/07/hive-sql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/07/hive-sql/" class="post-title-link" itemprop="url">hive sql</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-07 20:54:39" itemprop="dateCreated datePublished" datetime="2020-12-07T20:54:39+08:00">2020-12-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/07/%E5%88%9D%E7%BA%A7%E7%BB%9F%E8%AE%A1%E5%AD%A6%E5%9B%9E%E9%A1%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/07/%E5%88%9D%E7%BA%A7%E7%BB%9F%E8%AE%A1%E5%AD%A6%E5%9B%9E%E9%A1%BE/" class="post-title-link" itemprop="url">初级统计学回顾</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-07 20:48:22" itemprop="dateCreated datePublished" datetime="2020-12-07T20:48:22+08:00">2020-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-09 22:31:47" itemprop="dateModified" datetime="2020-12-09T22:31:47+08:00">2020-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">统计学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="统计学"><a href="#统计学" class="headerlink" title="统计学"></a>统计学</h1><h2 id="第一章-课程导学"><a href="#第一章-课程导学" class="headerlink" title="第一章 课程导学"></a>第一章 课程导学</h2><p><strong>知识点 1什么是统计学</strong>?</p>
+<p>​    生活中许多东西都能抽象出来，比如年龄、性别 等都能用<strong>数据</strong>来表示，然后对这些数据进行加工处理后，能<strong>发现客观现象内在的数量规律性</strong>，比如硬币 只要投的够多正反出现次数比例就会接近1：1，又如身高 大多数人身高会 服从正态分布,最后根据这些规律<strong>进行决策和预测</strong>。这就是统计学。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/07/%E5%88%9D%E7%BA%A7%E7%BB%9F%E8%AE%A1%E5%AD%A6%E5%9B%9E%E9%A1%BE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">机器学习基础知识</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-05 17:48:42" itemprop="dateCreated datePublished" datetime="2020-12-05T17:48:42+08:00">2020-12-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-23 22:36:39" itemprop="dateModified" datetime="2021-03-23T22:36:39+08:00">2021-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>第一部分 </p>
+<p>机器学习的分类 ：监督 无监督 强化学习</p>
+<p>统计学习三要素：模型、策略、算法</p>
+<p>模型评估与模型选择(训练误差、测试误差)</p>
+<p>正则化与交叉验证</p>
+<p>泛化能力(泛化误差、泛化误差上界)</p>
+<p>生成模型与判别模型</p>
+<p>统计学习三大问题(分类问题、标注问题、回归问题)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/04/tableau/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/04/tableau/" class="post-title-link" itemprop="url">tableau</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-04 16:20:27" itemprop="dateCreated datePublished" datetime="2020-12-04T16:20:27+08:00">2020-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-14 03:00:48" itemprop="dateModified" datetime="2020-12-14T03:00:48+08:00">2020-12-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tableau/" itemprop="url" rel="index"><span itemprop="name">tableau</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Tableau可视化"><a href="#Tableau可视化" class="headerlink" title="Tableau可视化"></a>Tableau可视化</h1><h2 id="1、tableau页面介绍"><a href="#1、tableau页面介绍" class="headerlink" title="1、tableau页面介绍"></a>1、tableau页面介绍</h2><p>​    Tableau分为三个界面：刚进入是数据导入界面、导入之后是数据源界面、然后是可以建工作表界面进行作图</p>
+<p><img src="/2020/12/04/tableau/%E5%AF%BC%E5%85%A5%E7%95%8C%E9%9D%A2.png"></p>
+<p>数据导入界面：tableau可以导入本地的数据如excel数据，csv文件，也可以导入服务器数据库中的文件</p>
+<p>数据源界面：类似于excel工作簿下面有多个工作表</p>
+<p>工作表界面：将数据分为维度(分类)数据 和度量数据   然后是页面工具 筛选工具    标记工具 标记工具就是用来选择绘制什么图的 实际上tableau会根据数据自动选择图形 以及对图形进行一些操作。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/04/tableau/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/04/sql%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/04/sql%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/" class="post-title-link" itemprop="url">sql知识回顾</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-04 03:21:00" itemprop="dateCreated datePublished" datetime="2020-12-04T03:21:00+08:00">2020-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-21 17:07:28" itemprop="dateModified" datetime="2021-03-21T17:07:28+08:00">2021-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql/" itemprop="url" rel="index"><span itemprop="name">sql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="sql基础知识回顾"><a href="#sql基础知识回顾" class="headerlink" title="sql基础知识回顾"></a>sql基础知识回顾</h1><h2 id="一、检索数据"><a href="#一、检索数据" class="headerlink" title="一、检索数据"></a>一、检索数据</h2><p>检索数据需要掌握以下几点：</p>
+<ul>
+<li><p>检索全部： <code>SELECT * FROM table；</code></p>
+</li>
+<li><p>检索多列：以，分隔 也叫做<strong>投影查询</strong></p>
+</li>
+<li><p>检索不同的值 SELECT DISTINCT 列名 FROM 表；</p>
+</li>
+<li><p>限制检索结果：不同数据库实现不同 如sql server用top，mysql中用limit a offset b 表示从b行开始包括b行(从0开始计数)检索a行数据 如</p>
+</li>
+</ul>
+<p><code>SELECT name FROM product LIMIT 5 OFFSET 5;</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/04/sql%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/03/leetcode%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%B7%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -174,7 +894,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="临渊の博客">
+      <meta itemprop="name" content="郑嘉晖の博客">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -254,7 +974,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="临渊の博客">
+      <meta itemprop="name" content="郑嘉晖の博客">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -399,14 +1119,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -451,7 +1171,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
