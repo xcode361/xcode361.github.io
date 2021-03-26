@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a>
 
   </li>
   </ul>
@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-24 19:13:55" itemprop="dateModified" datetime="2021-03-24T19:13:55+08:00">2021-03-24</time>
+                <time title="修改时间：2021-03-26 23:05:56" itemprop="dateModified" datetime="2021-03-26T23:05:56+08:00">2021-03-26</time>
               </span>
 
           
@@ -450,93 +450,7 @@
 <li>hive</li>
 <li>hadoop</li>
 </ul>
-<p>参考数据蛙就业项目</p>
-
-      
-    </div>
-
-    
-    
-    
-
-<div>
-  
-</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2021/03/22/python%20DB%20api/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/author.jpg">
-      <meta itemprop="name" content="郑嘉晖">
-      <meta itemprop="description" content="不断进步">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="郑嘉晖の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/22/python%20DB%20api/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-22 19:40:40" itemprop="dateCreated datePublished" datetime="2021-03-22T19:40:40+08:00">2021-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-23 19:06:24" itemprop="dateModified" datetime="2021-03-23T19:06:24+08:00">2021-03-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>大多数教程推荐的 MySQLdb好像不行啊，是python 2.x的…</p>
-<p>又针对python 3.x检索了一番，找到了PyMySQL（参见<a href="https://link.zhihu.com/?target=https://www.runoob.com/python3/python3-mysql.html">菜鸟教程-PyMySQL驱动</a>）。能用是能用，但还是有点不太对啊，这查询出来保存为字符串了，要弄成结构化的还要写for循环…这操作未免也太不python了不是？</p>
-<h2 id="ORM技术"><a href="#ORM技术" class="headerlink" title="ORM技术"></a>ORM技术</h2><p>  对象关系映射技术，即ORM（Object-Relational Mapping）技术，指的是把关系数据库的表结构映射到对象上，通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。<br>   在Python中，最有名的ORM框架是SQLAlchemy。Java中典型的ORM中间件有:Hibernate,ibatis,speedframework。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install pandas</span><br><span class="line">pip install sqlalchemy</span><br><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
-
-<p>初始化数据库连接</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化数据库连接</span></span><br><span class="line"><span class="comment"># 按实际情况依次填写MySQL的用户名、密码、IP地址、端口、数据库名</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://root:12345678@localhost:3306/testdb&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果觉得上方代码不够优雅也可以按下面的格式填写</span></span><br><span class="line"><span class="comment"># engine = create_engine(&quot;mysql+pymysql://&#123;&#125;:&#123;&#125;@&#123;&#125;:&#123;&#125;/&#123;&#125;&quot;.format(&#x27;root&#x27;, &#x27;12345678&#x27;, &#x27;localhost&#x27;, &#x27;3306&#x27;, &#x27;testdb&#x27;))</span></span><br></pre></td></tr></table></figure>
-
-<p>这里“mysql+pymysql://”是指明通过pymysql这个包来连接数据库，也可以使用mysqlconnector；如果是python2.x可以替换为MySQLdb来连接。MySQL的IP地址和端口号，默认为localhost:3306。</p>
-<h2 id="Python读取数据库"><a href="#Python读取数据库" class="headerlink" title="Python读取数据库"></a>Python读取数据库</h2><p>写好查询语句并执行，将结果存入数据框DataFrame：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MySQL导入DataFrame</span></span><br><span class="line"><span class="comment"># 填写自己所需的SQL语句，可以是复杂的查询语句</span></span><br><span class="line">sql_query = <span class="string">&#x27;select * from product;&#x27;</span></span><br><span class="line"><span class="comment"># 使用pandas的read_sql_query函数执行SQL语句，并存入DataFrame</span></span><br><span class="line">df_read = pd.read_sql_query(sql_query, engine)</span><br><span class="line">print(df_read)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Python写入数据库"><a href="#Python写入数据库" class="headerlink" title="Python写入数据库"></a>Python写入数据库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建DataFrame</span></span><br><span class="line">df_write = pd.DataFrame(&#123;<span class="string">&#x27;id&#x27;</span>: [<span class="number">10</span>, <span class="number">27</span>, <span class="number">34</span>, <span class="number">46</span>], <span class="string">&#x27;name&#x27;</span>: [<span class="string">&#x27;张三&#x27;</span>, <span class="string">&#x27;李四&#x27;</span>, <span class="string">&#x27;王五&#x27;</span>, <span class="string">&#x27;赵六&#x27;</span>], <span class="string">&#x27;score&#x27;</span>: [<span class="number">80</span>, <span class="number">75</span>, <span class="number">56</span>, <span class="number">99</span>]&#125;)</span><br><span class="line"><span class="comment"># 将df储存为MySQL中的表，不储存index列</span></span><br><span class="line">df_write.to_sql(<span class="string">&#x27;testdf&#x27;</span>, engine, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<p>参考资料：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/72347359">https://zhuanlan.zhihu.com/p/72347359</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lzw2016/article/details/84720433">https://blog.csdn.net/lzw2016/article/details/84720433</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/238a13995b2b">https://www.jianshu.com/p/238a13995b2b</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-mysql.html">https://www.runoob.com/python3/python3-mysql.html</a></p>
+<p>参考 datafrog</p>
 
       
     </div>
@@ -583,10 +497,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-03-22 14:44:47 / 修改时间：14:47:20" itemprop="dateCreated datePublished" datetime="2021-03-22T14:44:47+08:00">2021-03-22</time>
+              <time title="创建时间：2021-03-22 14:44:47" itemprop="dateCreated datePublished" datetime="2021-03-22T14:44:47+08:00">2021-03-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-26 23:37:12" itemprop="dateModified" datetime="2021-03-26T23:37:12+08:00">2021-03-26</time>
+              </span>
 
           
 
@@ -599,9 +519,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Numpy学习<br>Numpy思维导图<br><img src="/2021/03/22/numpy%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Users/YEHU_Z~1/AppData/Local/Temp/BNZ.60583d532f8ef4b2/Numpy%E4%B8%8EPandas/0.png" alt="jupyter"></p>
-<h1 id="为什么要用numpy库"><a href="#为什么要用numpy库" class="headerlink" title="为什么要用numpy库"></a>为什么要用numpy库</h1><p><img src="/2021/03/22/numpy%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Users/YEHU_Z~1/AppData/Local/Temp/BNZ.60583d532f8ef4b2/Numpy%E4%B8%8EPandas/1.png" alt="jupyter"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line">numpy.__version__</span><br><span class="line"><span class="comment">#numpy的教程见www.numpy.org</span></span><br></pre></td></tr></table></figure>
+          <p>Numpy学习<br>Numpy思维导图</p>
+<h1 id="为什么要用numpy库"><a href="#为什么要用numpy库" class="headerlink" title="为什么要用numpy库"></a>为什么要用numpy库</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line">numpy.__version__</span><br><span class="line"><span class="comment">#numpy的教程见www.numpy.org</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -2393,127 +2312,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2021/03/18/%E9%9D%A2%E8%AF%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/author.jpg">
-      <meta itemprop="name" content="郑嘉晖">
-      <meta itemprop="description" content="不断进步">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="郑嘉晖の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/18/%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-18 13:00:28" itemprop="dateCreated datePublished" datetime="2021-03-18T13:00:28+08:00">2021-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-22 10:26:08" itemprop="dateModified" datetime="2021-03-22T10:26:08+08:00">2021-03-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>1、sql语句的执行顺序与书写顺序</p>
-<p><img src="/2021/03/18/%E9%9D%A2%E8%AF%95%E9%A2%98/笔记\pic\1616043879504.png" alt="1616043879504"></p>
-<p><img src="/2021/03/18/%E9%9D%A2%E8%AF%95%E9%A2%98/笔记\pic\1616045101691.png" alt="1616045101691"></p>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ha4y1a791">https://www.bilibili.com/video/BV1Ha4y1a791</a></p>
-<p>2、with cube 与with rollup</p>
-<p>3、清洗数据的过程</p>
-<p>答 <strong>选择子集(特征工程)-&gt;列名重命名-&gt;删除重复值-&gt;缺失值处理-&gt;一致化处理-&gt;数据排序-&gt;异常值处理</strong></p>
-<p>重要</p>
-<p>4、DAU下降20% 如何分析(多维度拆解)</p>
-<p><strong>第一步</strong>、核实数据的真实性</p>
-<p>可能是监控看板 、统计系统，有可能是周期性变化 当然20%应该不是</p>
-<p><strong>第二步</strong>、进行维度的拆分(初步 确定问题的所在)</p>
-<p>DAU是以用户为核心的关键指标</p>
-<p>人</p>
-<p>从用户的角度： 理所当然的基本的用户画像 ：年龄 性别 地区 可以当作拆解指标</p>
-<p>新老用户：新老用户对产品的迭代反应情况不同</p>
-<p>用户来源渠道：可以为后续拉新成本投入上面提供决策帮助</p>
-<p>用户登录入口：手机端还是pc端</p>
-<p>用户所使用的机型</p>
-<p>货</p>
-<p>① 不同品类</p>
-<p>② 不同价位</p>
-<p>③ 不同商家</p>
-<p>以GMV为例(<strong>GMV=访客数（uv）*订单转化率(cr)*单均价</strong>)</p>
-<p>若数据表明去年连衣裙品类产品的GMV占整体GMV比例高达40%，但GMV同比下降了30%，则大胆推测可能是由于连衣裙品类表现不佳，导致整体GMV同比下滑严重。若发现有一批去年同期十分活跃、产量较高的商家，今年没有上架产品，可能是因为商家维护、商家合作政策的变动，需要具体评估后考虑是否追回这批商家</p>
-<p>场</p>
-<ul>
-<li>拆平台：IOS/安卓</li>
-<li>拆版本：新/老版本</li>
-<li>拆区域：省份/国家</li>
-<li>拆时间：访问时段、淡旺季、产品周期性(同比、环比)</li>
-</ul>
-<p>第三步 做出假设 (定位了问题所在) 分锅</p>
-<p> 从内部和外部角度来进行假设</p>
-<p>内部因素 1产品(策略 、ui设计、某个功能变动)、开发(bug秒退 崩溃)、运营(产品的拉新、push的推动)</p>
-<p>换个视角：获客 满足需求 提活手段 </p>
-<p>外部因素：PEST方法 政治因素 经济(短期内竞争对手的活动) 社会(舆论、用户生活方式变化、消费心理)技术（创新解决方案、分销渠道变化）</p>
-<p>对指标进行排查完即可 </p>
-<p>针对<strong>复合指标</strong> 如gmv</p>
-<p>gmv=访客数*订单转化率 *均价</p>
-<p>访客数 可以进行分解 </p>
-<p>转化率可以用漏斗分析</p>
-<p>参考：文档、<a target="_blank" rel="noopener" href="https://blog.csdn.net/YYIverson/article/details/103844966">https://blog.csdn.net/YYIverson/article/details/103844966</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34069667/article/details/107135095">https://blog.csdn.net/qq_34069667/article/details/107135095</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16A411W7Ce">https://www.bilibili.com/video/BV16A411W7Ce</a></p>
-<p>5、费米思想</p>
-<p>芝加哥多少架钢琴</p>
-<p>分解问题：芝加哥多少架钢琴=芝加哥有多少钢琴/一个调音师全年能调多少架钢琴=(芝加哥有多少钢琴*每架钢琴多久调一次)/(钢琴师每年工作几天)乘以(每个调音师每小时可调数量)</p>
-<p>对于最基本的子问题，只需要估算10倍以内就好</p>
-<p>1、估算新生儿数量</p>
-<p>参考<a target="_blank" rel="noopener" href="https://blog.nowcoder.net/n/48065e4072e0434892b4b6744810286b">https://blog.nowcoder.net/n/48065e4072e0434892b4b6744810286b</a></p>
-<p>6数据埋点</p>
-<p>7abtest</p>
-
-      
-    </div>
-
-    
-    
-    
-
-<div>
-  
-</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2021/03/05/%E6%95%B0%E6%8D%AE%E5%8C%96%E7%AE%A1%E7%90%86%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2832,6 +2630,202 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/09/pandas100%E9%81%93%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/09/pandas100%E9%81%93%E9%A2%98/" class="post-title-link" itemprop="url">pandas100道题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-09 16:58:58" itemprop="dateCreated datePublished" datetime="2020-12-09T16:58:58+08:00">2020-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-21 19:54:45" itemprop="dateModified" datetime="2021-03-21T19:54:45+08:00">2021-03-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="练习1"><a href="#练习1" class="headerlink" title="练习1"></a>练习1</h4><p>chipo数据结构长这样</p>
+<table>
+<thead>
+<tr>
+<th align="right">order_id</th>
+<th align="right">quantity</th>
+<th align="right">item_name</th>
+<th align="right">choice_description</th>
+<th align="right">item_price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<p>1、被下单最多的商品是什么？ 比如求出几个</p>
+<p>chipo.groupby(‘item_name’).sum().sort_values(by=’quantity’,ascending=False).reset_index()[0:3]</p>
+<p>注意这里需要reset_index()将其变成dataframe对象</p>
+<p>2、一共有多少种商品被下单<br>print(chipo[‘item_name’].nunique())<br>每个商品各被下单了多少次<br>print(chipo[‘item_name’].value_counts().head(3))<br>一共有多少商品被下单<br>print(chipo[‘quantity’].sum())</p>
+<p>这些是常用函数</p>
+<p>3、item_price是字符型将其转化为浮点型</p>
+<p>dollarizer = lambda x: float(x[1:-1])<br>chipo[‘item_price’] = chipo[‘item_price’].apply(dollarizer)</p>
+<p>另一种方法 ：chipo[‘item_price’]=chipo[‘item_price’].str.replace(“$”,””).astype(“float”)</p>
+<p>4、在该数据集对应的时期内，收入(revenue)是多少 </p>
+<p>显然收入=price*quantity然后加总起来</p>
+<p>chipo[‘sub_total’]=round(chipo[‘quantity’]*chipo[‘item_price’],2)<br>chipo[‘sub_total’].sum()</p>
+<p>5、在该数据集中一共有多少订单 和一共有多少种商品类似<br>chipo[‘order_id’].nunique()</p>
+<p>6、每一单的平均总价是多少</p>
+<p>平均总价=收入/订单数</p>
+<p>(chipo[‘sub_total’].sum())/(chipo[‘order_id’].nunique())</p>
+<p>另一种方法 </p>
+<p>chipo[[‘order_id’,’sub_total’]].groupby(by=[‘order_id’]<br>).agg({‘sub_total’:’sum’})[‘sub_total’].mean()</p>
+<h4 id="练习2-数据过滤与排序"><a href="#练习2-数据过滤与排序" class="headerlink" title="练习2 数据过滤与排序"></a>练习2 数据过滤与排序</h4>
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/" class="post-title-link" itemprop="url">sql面试50题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-08 02:00:24" itemprop="dateCreated datePublished" datetime="2020-12-08T02:00:24+08:00">2020-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-20 02:39:06" itemprop="dateModified" datetime="2020-12-20T02:39:06+08:00">2020-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">sql刷题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="sql面试50题-来自猴子数据分析"><a href="#sql面试50题-来自猴子数据分析" class="headerlink" title="sql面试50题 来自猴子数据分析"></a>sql面试50题 来自猴子数据分析</h1><p>首先表的关系明确下来 ：</p>
+<p><img src="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/1.jpg"></p>
+<h2 id="简单查询部分"><a href="#简单查询部分" class="headerlink" title="简单查询部分"></a>简单查询部分</h2><p>1.查询姓猴的学生名单、最后一个字带猴的、查询姓名中带猴的</p>
+<p>解决思路：明显是使用通配符筛选即可 通配符有% _  []</p>
+<p>代码：</p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;猴%&#39;;</code></p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;%猴&#39;;</code></p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;%猴%&#39;;</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -2903,7 +2897,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
