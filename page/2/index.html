@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a>
 
   </li>
   </ul>
@@ -161,6 +161,202 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/09/pandas100%E9%81%93%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/09/pandas100%E9%81%93%E9%A2%98/" class="post-title-link" itemprop="url">pandas100道题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-09 16:58:58" itemprop="dateCreated datePublished" datetime="2020-12-09T16:58:58+08:00">2020-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-21 19:54:45" itemprop="dateModified" datetime="2021-03-21T19:54:45+08:00">2021-03-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="练习1"><a href="#练习1" class="headerlink" title="练习1"></a>练习1</h4><p>chipo数据结构长这样</p>
+<table>
+<thead>
+<tr>
+<th align="right">order_id</th>
+<th align="right">quantity</th>
+<th align="right">item_name</th>
+<th align="right">choice_description</th>
+<th align="right">item_price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<p>1、被下单最多的商品是什么？ 比如求出几个</p>
+<p>chipo.groupby(‘item_name’).sum().sort_values(by=’quantity’,ascending=False).reset_index()[0:3]</p>
+<p>注意这里需要reset_index()将其变成dataframe对象</p>
+<p>2、一共有多少种商品被下单<br>print(chipo[‘item_name’].nunique())<br>每个商品各被下单了多少次<br>print(chipo[‘item_name’].value_counts().head(3))<br>一共有多少商品被下单<br>print(chipo[‘quantity’].sum())</p>
+<p>这些是常用函数</p>
+<p>3、item_price是字符型将其转化为浮点型</p>
+<p>dollarizer = lambda x: float(x[1:-1])<br>chipo[‘item_price’] = chipo[‘item_price’].apply(dollarizer)</p>
+<p>另一种方法 ：chipo[‘item_price’]=chipo[‘item_price’].str.replace(“$”,””).astype(“float”)</p>
+<p>4、在该数据集对应的时期内，收入(revenue)是多少 </p>
+<p>显然收入=price*quantity然后加总起来</p>
+<p>chipo[‘sub_total’]=round(chipo[‘quantity’]*chipo[‘item_price’],2)<br>chipo[‘sub_total’].sum()</p>
+<p>5、在该数据集中一共有多少订单 和一共有多少种商品类似<br>chipo[‘order_id’].nunique()</p>
+<p>6、每一单的平均总价是多少</p>
+<p>平均总价=收入/订单数</p>
+<p>(chipo[‘sub_total’].sum())/(chipo[‘order_id’].nunique())</p>
+<p>另一种方法 </p>
+<p>chipo[[‘order_id’,’sub_total’]].groupby(by=[‘order_id’]<br>).agg({‘sub_total’:’sum’})[‘sub_total’].mean()</p>
+<h4 id="练习2-数据过滤与排序"><a href="#练习2-数据过滤与排序" class="headerlink" title="练习2 数据过滤与排序"></a>练习2 数据过滤与排序</h4>
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/" class="post-title-link" itemprop="url">sql面试50题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-08 02:00:24" itemprop="dateCreated datePublished" datetime="2020-12-08T02:00:24+08:00">2020-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-20 02:39:06" itemprop="dateModified" datetime="2020-12-20T02:39:06+08:00">2020-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">sql刷题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="sql面试50题-来自猴子数据分析"><a href="#sql面试50题-来自猴子数据分析" class="headerlink" title="sql面试50题 来自猴子数据分析"></a>sql面试50题 来自猴子数据分析</h1><p>首先表的关系明确下来 ：</p>
+<p><img src="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/1.jpg"></p>
+<h2 id="简单查询部分"><a href="#简单查询部分" class="headerlink" title="简单查询部分"></a>简单查询部分</h2><p>1.查询姓猴的学生名单、最后一个字带猴的、查询姓名中带猴的</p>
+<p>解决思路：明显是使用通配符筛选即可 通配符有% _  []</p>
+<p>代码：</p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;猴%&#39;;</code></p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;%猴&#39;;</code></p>
+<p><code>SELECT * FROM student WHERE 姓名 like &#39;%猴%&#39;;</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/08/sql%E9%9D%A2%E8%AF%9550%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -930,7 +1126,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

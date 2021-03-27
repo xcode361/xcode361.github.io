@@ -1,0 +1,4175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xcode361.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="title: 自行车业务BIdate: 2021-03-27 00:06:23tags: 一 项目背景​    这是国内一家自行车制造公司，该公司生产和销售金属和复合材料自行车在全国各个市场。销售方式主要有两种，前期主要是分销商模式，但是2018年公司实现财政收入目标后，2019就开始通过公司自有网站获取线上商户进一步扩大市场。 二 分析目的1、如何指定销售策略，调整产品结构，保持告诉增长，获取更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="郑嘉晖の博客">
+<meta property="og:url" content="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/index.html">
+<meta property="og:site_name" content="郑嘉晖の博客">
+<meta property="og:description" content="title: 自行车业务BIdate: 2021-03-27 00:06:23tags: 一 项目背景​    这是国内一家自行车制造公司，该公司生产和销售金属和复合材料自行车在全国各个市场。销售方式主要有两种，前期主要是分销商模式，但是2018年公司实现财政收入目标后，2019就开始通过公司自有网站获取线上商户进一步扩大市场。 二 分析目的1、如何指定销售策略，调整产品结构，保持告诉增长，获取更">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/1.png">
+<meta property="og:image" content="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/2.png">
+<meta property="og:image" content="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/3.png">
+<meta property="og:image" content="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/4.png">
+<meta property="og:image" content="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/5.png">
+<meta property="article:published_time" content="2021-03-26T16:06:23.956Z">
+<meta property="article:modified_time" content="2021-03-27T07:09:15.790Z">
+<meta property="article:author" content="郑嘉晖">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/1.png">
+
+<link rel="canonical" href="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | 郑嘉晖の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">郑嘉晖の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录成长</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/xcode361" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="郑嘉晖">
+      <meta itemprop="description" content="不断进步">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="郑嘉晖の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-27 00:06:23 / 修改时间：15:09:15" itemprop="dateCreated datePublished" datetime="2021-03-27T00:06:23+08:00">2021-03-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>title: 自行车业务BI<br>date: 2021-03-27 00:06:23<br>tags:</p>
+<h1 id="一-项目背景"><a href="#一-项目背景" class="headerlink" title="一 项目背景"></a>一 项目背景</h1><p>​    这是国内一家自行车制造公司，该公司生产和销售金属和复合材料自行车在全国各个市场。销售方式主要有两种，前期主要是分销商模式，但是2018年公司实现财政收入目标后，2019就开始通过公司自有网站获取线上商户进一步扩大市场。</p>
+<h1 id="二-分析目的"><a href="#二-分析目的" class="headerlink" title="二 分析目的"></a>二 分析目的</h1><p>1、如何指定销售策略，调整产品结构，保持告诉增长，获取更多收益，占取更多份额</p>
+<p>2、对自行车销售状况、走势变化、为客户制定销售策略，完善产品结构提供依据</p>
+<p>3、对用户行为进行分析</p>
+<h1 id="三-数据介绍"><a href="#三-数据介绍" class="headerlink" title="三 数据介绍"></a>三 数据介绍</h1><p>dw_customer_order 产品销售信息事实表</p>
+<p>ods_customer  每天新增客户信息表</p>
+<p>dim_date_df 日期表</p>
+<p>ods_sales_orders  订单明细表</p>
+<p>数据字典如下图所示</p>
+<p><img src="/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/1.png"></p>
+<p><img src="/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/2.png"></p>
+<p><img src="/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/3.png"></p>
+<p>分析的思路 ：</p>
+<p>1、从整体的角度：分析2019.1-2019.11月自行车整体销售表现</p>
+<p>2、从地域的角度：分析11月每个区域销售量表现、11月TOP10城市销售量表现</p>
+<p>3、从产品的角度：分析11月类别产品销售量表现、11月细分产品销售量表现</p>
+<p>4 、热销产品：分析11月TOP10产品销量榜、11月TOP10销量增速榜</p>
+<p>5、从用户的角度：分析11月用户年龄分布及每个年龄段产品购买喜好、11月男女用户比例及产品购买喜好</p>
+<a id="more"></a>
+
+<p>用python连接数据库涉及到ORM技术</p>
+<p>  对象关系映射技术，即ORM（Object-Relational Mapping）技术，指的是把关系数据库的表结构映射到对象上，通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。<br>   在Python中，最有名的ORM框架是SQLAlchemy。Java中典型的ORM中间件有:Hibernate,ibatis,speedframework。</p>
+<h2 id="2019年11月自行车业务分析报告"><a href="#2019年11月自行车业务分析报告" class="headerlink" title="2019年11月自行车业务分析报告"></a>2019年11月自行车业务分析报告</h2><ul>
+<li><strong>一、自行车整体销售表现</strong></li>
+<li><strong>二、2019年11月自行车地域销售表现</strong></li>
+<li><strong>三、2019年11月自行车产品销售表现</strong></li>
+<li><strong>四、用户行为分析</strong></li>
+<li><strong>五、2019年11月热品销售分析</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入模块</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br></pre></td></tr></table></figure>
+
+<h3 id="一、自行车整体销售表现"><a href="#一、自行车整体销售表现" class="headerlink" title="一、自行车整体销售表现"></a>一、自行车整体销售表现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化数据库连接</span></span><br><span class="line"><span class="comment"># 按实际情况依次填写MySQL的用户名、密码、IP地址、端口、数据库名</span></span><br><span class="line"><span class="comment">#创建引擎</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://frogdata001:Frogdata@144@106.12.180.221:3306/adventure_ods?charset=gbk&#x27;</span>)</span><br><span class="line"><span class="comment">#mysql+pymysql://”是指明通过pymysql这个包来连接数据库，也可以使用mysqlconnector；如果是python2.x可以替换为MySQLdb来连接</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#读取数据库中的表</span></span><br><span class="line">sql_query=<span class="string">&#x27;select * from dw_customer_order&#x27;</span></span><br><span class="line"><span class="comment"># 使用pandas的read_sql_query函数执行SQL语句，并存入DataFrame</span></span><br><span class="line">gather_customer_order=pd.read_sql_query(sql_query,con=engine)</span><br><span class="line">gather_customer_order.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>东北</td>
+      <td>辽宁省</td>
+      <td>沈阳市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>山东省</td>
+      <td>滨州市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>山东省</td>
+      <td>烟台市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>江苏省</td>
+      <td>南京市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>江苏省</td>
+      <td>连云港市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>268121</td>
+      <td>2020-10-11</td>
+      <td>Women's Mountain Shorts</td>
+      <td>短裤</td>
+      <td>服装</td>
+      <td>东北</td>
+      <td>辽宁省</td>
+      <td>阜新市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>69.99</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>268122</td>
+      <td>2020-10-11</td>
+      <td>Women's Mountain Shorts</td>
+      <td>短裤</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>浙江省</td>
+      <td>嘉兴市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>69.99</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>268123</td>
+      <td>2020-10-11</td>
+      <td>Women's Mountain Shorts</td>
+      <td>短裤</td>
+      <td>服装</td>
+      <td>华中</td>
+      <td>湖南省</td>
+      <td>株洲市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>69.99</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>268124</td>
+      <td>2020-10-11</td>
+      <td>Women's Mountain Shorts</td>
+      <td>短裤</td>
+      <td>服装</td>
+      <td>华中</td>
+      <td>湖南省</td>
+      <td>湘潭市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>69.99</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>268125</td>
+      <td>2020-10-11</td>
+      <td>Women's Mountain Shorts</td>
+      <td>短裤</td>
+      <td>服装</td>
+      <td>华北</td>
+      <td>河北省</td>
+      <td>唐山市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>69.99</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>268126 rows × 17 columns</p>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看数据类型</span></span><br><span class="line">gather_customer_order.info()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span><br><span class="line">RangeIndex: 268126 entries, 0 to 268125</span><br><span class="line">Data columns (total 17 columns):</span><br><span class="line">create_date           268126 non-null object</span><br><span class="line">product_name          268126 non-null object</span><br><span class="line">cpzl_zw               268126 non-null object</span><br><span class="line">cplb_zw               268126 non-null object</span><br><span class="line">chinese_territory     268126 non-null object</span><br><span class="line">chinese_province      268126 non-null object</span><br><span class="line">chinese_city          268126 non-null object</span><br><span class="line">order_num             268126 non-null int64</span><br><span class="line">customer_num          268126 non-null int64</span><br><span class="line">sum_amount            268126 non-null float64</span><br><span class="line">is_current_year       268126 non-null int64</span><br><span class="line">is_last_year          268126 non-null int64</span><br><span class="line">is_yesterday          268126 non-null int64</span><br><span class="line">is_today              268126 non-null int64</span><br><span class="line">is_current_month      268126 non-null int64</span><br><span class="line">is_current_quarter    268126 non-null int64</span><br><span class="line">is_21_day             268126 non-null int64</span><br><span class="line">dtypes: float64(1), int64(9), object(7)</span><br><span class="line">memory usage: 34.8+ MB</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置create_year_month月份字段，按月维度分析时使用</span></span><br><span class="line"><span class="comment">#先将create_date列转化为时间戳格式然后再保留月份</span></span><br><span class="line">gather_customer_order[<span class="string">&#x27;create_date&#x27;</span>]=pd.to_datetime(gather_customer_order[<span class="string">&#x27;create_date&#x27;</span>])</span><br><span class="line">gather_customer_order[<span class="string">&#x27;create_year_month&#x27;</span>]=gather_customer_order[<span class="string">&#x27;create_date&#x27;</span>].apply(<span class="keyword">lambda</span> x:x.strftime(<span class="string">&#x27;%Y-%m&#x27;</span>))</span><br><span class="line">gather_customer_order.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>东北</td>
+      <td>辽宁省</td>
+      <td>沈阳市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>山东省</td>
+      <td>滨州市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>山东省</td>
+      <td>烟台市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>江苏省</td>
+      <td>南京市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01-02</td>
+      <td>AWC Logo Cap</td>
+      <td>帽子</td>
+      <td>服装</td>
+      <td>华东</td>
+      <td>江苏省</td>
+      <td>连云港市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#我们要分析的是自行车 但是产品类别(cplb_zw)有三种</span></span><br><span class="line">gather_customer_order[<span class="string">&#x27;cplb_zw&#x27;</span>].unique()</span><br><span class="line"><span class="comment">#索引要筛选出 产品类别为自行车的</span></span><br><span class="line">gather_customer_order=gather_customer_order[gather_customer_order[<span class="string">&#x27;cplb_zw&#x27;</span>]==<span class="string">&#x27;自行车&#x27;</span>]</span><br><span class="line">gather_customer_order</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>146</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>福建省</td>
+      <td>三明市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>河北省</td>
+      <td>衡水市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华南</td>
+      <td>广东省</td>
+      <td>佛山市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>149</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Silver</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>内蒙古自治区</td>
+      <td>呼伦贝尔市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3399.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>150</td>
+      <td>2019-01-02</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>东北</td>
+      <td>黑龙江省</td>
+      <td>伊春市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>268058</td>
+      <td>2020-10-11</td>
+      <td>Touring-3000 Blue</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>直辖市</td>
+      <td>天津市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>742.35</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2020-10</td>
+    </tr>
+    <tr>
+      <td>268059</td>
+      <td>2020-10-11</td>
+      <td>Touring-3000 Yellow</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>江苏省</td>
+      <td>南京市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>742.35</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2020-10</td>
+    </tr>
+    <tr>
+      <td>268060</td>
+      <td>2020-10-11</td>
+      <td>Touring-3000 Yellow</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>西北</td>
+      <td>甘肃省</td>
+      <td>定西市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>742.35</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2020-10</td>
+    </tr>
+    <tr>
+      <td>268061</td>
+      <td>2020-10-11</td>
+      <td>Touring-3000 Yellow</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>云南省</td>
+      <td>丽江市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>742.35</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2020-10</td>
+    </tr>
+    <tr>
+      <td>268062</td>
+      <td>2020-10-11</td>
+      <td>Touring-3000 Yellow</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>四川省</td>
+      <td>雅安市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>742.35</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2020-10</td>
+    </tr>
+  </tbody>
+</table>
+<p>68555 rows × 18 columns</p>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#求每月订单销售量与销售金额 总计</span></span><br><span class="line">overall_sales_performance=gather_customer_order.groupby(<span class="string">&#x27;create_year_month&#x27;</span>).agg(&#123;<span class="string">&#x27;order_num&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>,<span class="string">&#x27;sum_amount&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>&#125;).reset_index()</span><br><span class="line">overall_sales_performance.head()</span><br><span class="line"><span class="comment">#这样就显示了2019年1月至2021年2月 所有的订单销售量与销售金额情况</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+      <th>sum_amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>5.654769e+06</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-02</td>
+      <td>2735</td>
+      <td>5.085124e+06</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-03</td>
+      <td>3086</td>
+      <td>5.813549e+06</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-04</td>
+      <td>2995</td>
+      <td>5.603896e+06</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-05</td>
+      <td>3213</td>
+      <td>5.959007e+06</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h3 id="计算销售量环比"><a href="#计算销售量环比" class="headerlink" title="计算销售量环比"></a>计算销售量环比</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#为了后续求环比 需要进行降序排序，如果是顺序可能需要两个list计算完后再添加到表格中</span></span><br><span class="line"><span class="comment">#这一步很重要</span></span><br><span class="line">overall_sales_performance=overall_sales_performance.sort_values(<span class="string">&#x27;create_year_month&#x27;</span>,ascending=<span class="literal">False</span>)</span><br><span class="line">overall_sales_performance</span><br></pre></td></tr></table></figure>
+
+
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+      <th>sum_amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>21</td>
+      <td>2020-10</td>
+      <td>1269</td>
+      <td>2.319419e+06</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>2020-09</td>
+      <td>2226</td>
+      <td>4.136421e+06</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>2020-08</td>
+      <td>6553</td>
+      <td>1.286933e+07</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>2020-07</td>
+      <td>5063</td>
+      <td>9.321562e+06</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2020-06</td>
+      <td>3677</td>
+      <td>6.813112e+06</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>2020-05</td>
+      <td>3211</td>
+      <td>5.950093e+06</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>2020-04</td>
+      <td>3013</td>
+      <td>5.645093e+06</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>2020-03</td>
+      <td>3000</td>
+      <td>5.568607e+06</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>2020-02</td>
+      <td>2893</td>
+      <td>5.479098e+06</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>2020-01</td>
+      <td>3092</td>
+      <td>5.703812e+06</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>2019-12</td>
+      <td>2995</td>
+      <td>5.534792e+06</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>2019-11</td>
+      <td>2988</td>
+      <td>5.555037e+06</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>2019-10</td>
+      <td>3057</td>
+      <td>5.746104e+06</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>2019-09</td>
+      <td>2982</td>
+      <td>5.535049e+06</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>2019-08</td>
+      <td>3116</td>
+      <td>5.809926e+06</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>2019-07</td>
+      <td>3086</td>
+      <td>5.766131e+06</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>2019-06</td>
+      <td>2994</td>
+      <td>5.630473e+06</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-05</td>
+      <td>3213</td>
+      <td>5.959007e+06</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-04</td>
+      <td>2995</td>
+      <td>5.603896e+06</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-03</td>
+      <td>3086</td>
+      <td>5.813549e+06</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-02</td>
+      <td>2735</td>
+      <td>5.085124e+06</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>5.654769e+06</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算销售额环比 并增加一列 环比=这个月数据-上个月数据/上个月数据</span></span><br><span class="line"><span class="comment"># 可以使用diff函数</span></span><br><span class="line">order_num_diff=<span class="built_in">list</span>((overall_sales_performance.order_num.diff()/overall_sales_performance.order_num)/-<span class="number">1</span>)</span><br><span class="line">order_num_diff.pop(<span class="number">0</span>)  <span class="comment">#将位置对齐</span></span><br><span class="line">order_num_diff.append(<span class="number">0</span>) <span class="comment">#第一个月份是0</span></span><br><span class="line">overall_sales_performance[<span class="string">&#x27;order_num_diff&#x27;</span>]=order_num_diff</span><br><span class="line">overall_sales_performance</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+      <th>sum_amount</th>
+      <th>order_num_diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>21</td>
+      <td>2020-10</td>
+      <td>1269</td>
+      <td>2.319419e+06</td>
+      <td>-0.429919</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>2020-09</td>
+      <td>2226</td>
+      <td>4.136421e+06</td>
+      <td>-0.660308</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>2020-08</td>
+      <td>6553</td>
+      <td>1.286933e+07</td>
+      <td>0.294292</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>2020-07</td>
+      <td>5063</td>
+      <td>9.321562e+06</td>
+      <td>0.376938</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2020-06</td>
+      <td>3677</td>
+      <td>6.813112e+06</td>
+      <td>0.145126</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>2020-05</td>
+      <td>3211</td>
+      <td>5.950093e+06</td>
+      <td>0.065715</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>2020-04</td>
+      <td>3013</td>
+      <td>5.645093e+06</td>
+      <td>0.004333</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>2020-03</td>
+      <td>3000</td>
+      <td>5.568607e+06</td>
+      <td>0.036986</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>2020-02</td>
+      <td>2893</td>
+      <td>5.479098e+06</td>
+      <td>-0.064360</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>2020-01</td>
+      <td>3092</td>
+      <td>5.703812e+06</td>
+      <td>0.032387</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>2019-12</td>
+      <td>2995</td>
+      <td>5.534792e+06</td>
+      <td>0.002343</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>2019-11</td>
+      <td>2988</td>
+      <td>5.555037e+06</td>
+      <td>-0.022571</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>2019-10</td>
+      <td>3057</td>
+      <td>5.746104e+06</td>
+      <td>0.025151</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>2019-09</td>
+      <td>2982</td>
+      <td>5.535049e+06</td>
+      <td>-0.043004</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>2019-08</td>
+      <td>3116</td>
+      <td>5.809926e+06</td>
+      <td>0.009721</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>2019-07</td>
+      <td>3086</td>
+      <td>5.766131e+06</td>
+      <td>0.030728</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>2019-06</td>
+      <td>2994</td>
+      <td>5.630473e+06</td>
+      <td>-0.068161</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-05</td>
+      <td>3213</td>
+      <td>5.959007e+06</td>
+      <td>0.072788</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-04</td>
+      <td>2995</td>
+      <td>5.603896e+06</td>
+      <td>-0.029488</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-03</td>
+      <td>3086</td>
+      <td>5.813549e+06</td>
+      <td>0.128336</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-02</td>
+      <td>2735</td>
+      <td>5.085124e+06</td>
+      <td>-0.110569</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>5.654769e+06</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h3 id="diff函数详解-用来错位相减"><a href="#diff函数详解-用来错位相减" class="headerlink" title="diff函数详解 用来错位相减"></a>diff函数详解 用来错位相减</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#diff函数解释</span></span><br><span class="line">df=pd.DataFrame(&#123;<span class="string">&#x27;A&#x27;</span>:[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>]&#125;)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.diff() </span><br><span class="line"><span class="comment">#效果等价于df-df.shift df本身不变 实际上是错位相减</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h3 id="计算销售额环比"><a href="#计算销售额环比" class="headerlink" title="计算销售额环比"></a>计算销售额环比</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#同理可计算销售额环比</span></span><br><span class="line">sum_amount_diff=<span class="built_in">list</span>((overall_sales_performance.sum_amount.diff()/overall_sales_performance.sum_amount)/-<span class="number">1</span>)</span><br><span class="line">sum_amount_diff.pop(<span class="number">0</span>)  <span class="comment">#将位置对齐</span></span><br><span class="line">sum_amount_diff.append(<span class="number">0</span>) <span class="comment">#第一个月份是0</span></span><br><span class="line">overall_sales_performance[<span class="string">&#x27;sum_amount_diff&#x27;</span>]=sum_amount_diff</span><br><span class="line">overall_sales_performance=overall_sales_performance.rename(columns=&#123;<span class="string">&#x27;order_num_diff&#x27;</span>:<span class="string">&#x27;order_diff&#x27;</span>&#125;).sort_values(by = <span class="string">&#x27;create_year_month&#x27;</span>,ascending = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看每月自行车订单量、销售金额、环比、前5行</span></span><br><span class="line">overall_sales_performance.head(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+      <th>sum_amount</th>
+      <th>order_diff</th>
+      <th>sum_amount_diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>5.654769e+06</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-02</td>
+      <td>2735</td>
+      <td>5.085124e+06</td>
+      <td>-0.110569</td>
+      <td>-0.100737</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-03</td>
+      <td>3086</td>
+      <td>5.813549e+06</td>
+      <td>0.128336</td>
+      <td>0.143246</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-04</td>
+      <td>2995</td>
+      <td>5.603896e+06</td>
+      <td>-0.029488</td>
+      <td>-0.036063</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-05</td>
+      <td>3213</td>
+      <td>5.959007e+06</td>
+      <td>0.072788</td>
+      <td>0.063369</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<p><strong>字段注释：</strong></p>
+<p>create_year_month：时间，order_num：本月累计销售数量，sum_amount：本月累计销售金额，order_diff：本月销售数量环比，</p>
+<p>sum_amount_diff：本月销售金额环比，dw_customer_order:用户订单表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#最后to_sql将数据存入数据库</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://frogdata05:Frogdata!1321@106.15.121.232:3306/datafrog05_adventure?charset=gbk&#x27;</span>)</span><br><span class="line">datafrog=engine</span><br><span class="line"><span class="comment"># overall_sales_performance.to_sql(&#x27;pt_overall_sale_performance_1&#x27;,con = datafrog,if_exists=&#x27;append&#x27;, index=False)</span></span><br><span class="line">overall_sales_performance.to_sql(<span class="string">&#x27;zjh_pt_overall_sale_performance_1&#x27;</span>,con = datafrog,if_exists=<span class="string">&#x27;replace&#x27;</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p>销售金额环比和销售数量环比都已经导入zjh_pt_overall_sale_performance_1这个表中了 然后进行数据可视化</p>
+<p>整体角度最后通过power bi得到的图 如下所示</p>
+<p><img src="/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/4.png"></p>
+<h2 id="二、地域销售表现"><a href="#二、地域销售表现" class="headerlink" title="二、地域销售表现"></a>二、地域销售表现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#仍然是使用gather_customer_order</span></span><br><span class="line">gather_customer_order.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>146</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>福建省</td>
+      <td>三明市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>河北省</td>
+      <td>衡水市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华南</td>
+      <td>广东省</td>
+      <td>佛山市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>149</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Silver</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>内蒙古自治区</td>
+      <td>呼伦贝尔市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3399.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>150</td>
+      <td>2019-01-02</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>东北</td>
+      <td>黑龙江省</td>
+      <td>伊春市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进行筛选 分析的是 2019年10月和2019年11月销售情况</span></span><br><span class="line">gather_customer_order_10_11=gather_customer_order[gather_customer_order[<span class="string">&#x27;create_year_month&#x27;</span>].isin([<span class="string">&#x27;2019-10&#x27;</span>,<span class="string">&#x27;2019-11&#x27;</span>])]</span><br><span class="line">gather_customer_order_10_11.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>104684</td>
+      <td>2019-10-01</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>浙江省</td>
+      <td>湖州市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104685</td>
+      <td>2019-10-01</td>
+      <td>Mountain-100 Silver</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华中</td>
+      <td>湖南省</td>
+      <td>衡阳市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3399.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104686</td>
+      <td>2019-10-01</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>东北</td>
+      <td>辽宁省</td>
+      <td>抚顺市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2049.0982</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104687</td>
+      <td>2019-10-01</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>安徽省</td>
+      <td>马鞍山市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104688</td>
+      <td>2019-10-01</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>山东省</td>
+      <td>滨州市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看10月、11月订单数量</span></span><br><span class="line"><span class="built_in">len</span>(gather_customer_order_10_11) </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5929</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#分组统计不同地区</span></span><br><span class="line">gather_customer_order_10_11_group=gather_customer_order_10_11.groupby([<span class="string">&#x27;chinese_territory&#x27;</span>,<span class="string">&#x27;create_year_month&#x27;</span>]).\</span><br><span class="line">agg(&#123;<span class="string">&#x27;order_num&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>,<span class="string">&#x27;sum_amount&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>&#125;).reset_index()</span><br><span class="line">gather_customer_order_10_11_group.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chinese_territory</th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+      <th>sum_amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>东北</td>
+      <td>2019-10</td>
+      <td>264</td>
+      <td>5.150964e+05</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>东北</td>
+      <td>2019-11</td>
+      <td>250</td>
+      <td>4.536674e+05</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>华东</td>
+      <td>2019-10</td>
+      <td>820</td>
+      <td>1.520239e+06</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>华东</td>
+      <td>2019-11</td>
+      <td>784</td>
+      <td>1.419533e+06</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>华中</td>
+      <td>2019-10</td>
+      <td>470</td>
+      <td>8.727148e+05</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#求10月11月的销售环比情况</span></span><br><span class="line"><span class="comment">#将区域存为列表</span></span><br><span class="line">region_list=gather_customer_order_10_11_group[<span class="string">&#x27;chinese_territory&#x27;</span>].drop_duplicates(keep=<span class="string">&#x27;first&#x27;</span>).values.tolist()</span><br><span class="line">region_list</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[&#39;东北&#39;, &#39;华东&#39;, &#39;华中&#39;, &#39;华北&#39;, &#39;华南&#39;, &#39;台港澳&#39;, &#39;西北&#39;, &#39;西南&#39;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>解释pct_change()函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dt = pd.DataFrame(&#123;<span class="string">&quot;A&quot;</span>:[<span class="number">20</span>,<span class="number">25</span>,<span class="number">30</span>]&#125;)</span><br><span class="line"><span class="comment"># 得到 20-nan / nan = nan  ,  25-20/20=0.25 </span></span><br><span class="line"><span class="comment"># 当前元素-先前元素/先前元素</span></span><br><span class="line"><span class="comment"># 环比：当前月 - 上一月/上一月</span></span><br><span class="line">dt.pct_change()</span><br><span class="line"><span class="comment"># 所以可以看到pct_change()实际上就能够计算环比</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.20</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">order_x = pd.Series([])</span><br><span class="line">amount_x = pd.Series([])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> region_list:</span><br><span class="line">    a=gather_customer_order_10_11_group.loc[gather_customer_order_10_11_group[<span class="string">&#x27;chinese_territory&#x27;</span>]==i][<span class="string">&#x27;order_num&#x27;</span>].pct_change().fillna(<span class="number">0</span>)</span><br><span class="line">    b=gather_customer_order_10_11_group.loc[gather_customer_order_10_11_group[<span class="string">&#x27;chinese_territory&#x27;</span>]==i][<span class="string">&#x27;sum_amount&#x27;</span>].pct_change().fillna(<span class="number">0</span>)</span><br><span class="line">    order_x=order_x.append(a)</span><br><span class="line">    amount_x = amount_x.append(b)</span><br><span class="line"><span class="comment">#通过pct计算出环比，同时将缺失值填充为0 这样就得到order的环比a与amount的环比b</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gather_customer_order_10_11_group[<span class="string">&#x27;order_diff&#x27;</span>]=order_x</span><br><span class="line">gather_customer_order_10_11_group[<span class="string">&#x27;amount_diff&#x27;</span>]=amount_x</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#10月11月各个区域自行车销售数量、销售金额环比</span></span><br><span class="line">gather_customer_order_10_11_group.head() <span class="comment">#实际上只有11月有环比</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chinese_territory</th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+      <th>sum_amount</th>
+      <th>order_diff</th>
+      <th>amount_diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>东北</td>
+      <td>2019-10</td>
+      <td>264</td>
+      <td>5.150964e+05</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>东北</td>
+      <td>2019-11</td>
+      <td>250</td>
+      <td>4.536674e+05</td>
+      <td>-0.053030</td>
+      <td>-0.119257</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>华东</td>
+      <td>2019-10</td>
+      <td>820</td>
+      <td>1.520239e+06</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>华东</td>
+      <td>2019-11</td>
+      <td>784</td>
+      <td>1.419533e+06</td>
+      <td>-0.043902</td>
+      <td>-0.066244</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>华中</td>
+      <td>2019-10</td>
+      <td>470</td>
+      <td>8.727148e+05</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<p>字段注释：</p>
+<p>chinese_territory：区域，create_year_month：时间，order_num：区域销售数量，sum_amount：区域销售金额，order_diff：本月销售数量环比，</p>
+<p>amount_diff：本月销售金额环比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#同样写回数据库</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://frogdata05:Frogdata!1321@106.15.121.232:3306/datafrog05_adventure?charset=gbk&#x27;</span>)</span><br><span class="line">datafrog=engine</span><br><span class="line">gather_customer_order_10_11_group.to_sql(<span class="string">&#x27;zjh_pt_bicy_november_territory_2&#x27;</span>,con = datafrog,if_exists=<span class="string">&#x27;replace&#x27;</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-TOP10销售量城市环比情况"><a href="#2-2-TOP10销售量城市环比情况" class="headerlink" title="2.2 TOP10销售量城市环比情况"></a>2.2 TOP10销售量城市环比情况</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#思路首先需要筛选出top10的城市然后计算环比</span></span><br><span class="line"><span class="comment">#因为只有11月有环比首先筛选出11月的数据</span></span><br><span class="line">gather_customer_order_11= gather_customer_order_10_11.loc[gather_customer_order_10_11[<span class="string">&#x27;create_year_month&#x27;</span>] == <span class="string">&#x27;2019-11&#x27;</span>]</span><br><span class="line">gather_customer_order_11</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>116491</td>
+      <td>2019-11-01</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>东北</td>
+      <td>辽宁省</td>
+      <td>大连市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>116492</td>
+      <td>2019-11-01</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>浙江省</td>
+      <td>金华市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>116493</td>
+      <td>2019-11-01</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>四川省</td>
+      <td>自贡市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>116494</td>
+      <td>2019-11-01</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>直辖市</td>
+      <td>重庆市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>116495</td>
+      <td>2019-11-01</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>山东省</td>
+      <td>东营市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>127830</td>
+      <td>2019-11-30</td>
+      <td>Touring-1000 Yellow</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>西北</td>
+      <td>甘肃省</td>
+      <td>定西市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2384.07</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>127831</td>
+      <td>2019-11-30</td>
+      <td>Touring-1000 Yellow</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>云南省</td>
+      <td>昆明市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2384.07</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>127832</td>
+      <td>2019-11-30</td>
+      <td>Touring-2000 Blue</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>东北</td>
+      <td>黑龙江省</td>
+      <td>哈尔滨市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1214.85</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>127833</td>
+      <td>2019-11-30</td>
+      <td>Touring-3000 Blue</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>西北</td>
+      <td>新疆维吾尔自治区</td>
+      <td>和田地区</td>
+      <td>1</td>
+      <td>1</td>
+      <td>742.35</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+    <tr>
+      <td>127834</td>
+      <td>2019-11-30</td>
+      <td>Touring-3000 Blue</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>云南省</td>
+      <td>怒江傈僳族自治州</td>
+      <td>1</td>
+      <td>1</td>
+      <td>742.35</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-11</td>
+    </tr>
+  </tbody>
+</table>
+<p>2942 rows × 18 columns</p>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#按城市进行分组 同时统计销售数量order_num</span></span><br><span class="line">gather_customer_order_city_11=gather_customer_order_11.groupby([<span class="string">&#x27;chinese_city&#x27;</span>]).agg(&#123;<span class="string">&#x27;order_num&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>&#125;).reset_index()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进行排序选择出销量前十的城市</span></span><br><span class="line">gather_customer_order_city_head = gather_customer_order_city_11.sort_values(by = <span class="string">&#x27;order_num&#x27;</span>,ascending = <span class="literal">False</span>).head(<span class="number">10</span>)</span><br><span class="line"><span class="comment">#查看11月自行车销售数量前十城市</span></span><br><span class="line">gather_customer_order_city_head</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>33</td>
+      <td>北京市</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>上海市</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>218</td>
+      <td>重庆市</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <td>129</td>
+      <td>武汉市</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>154</td>
+      <td>深圳市</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>119</td>
+      <td>杭州市</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <td>88</td>
+      <td>广州市</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>成都市</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>237</td>
+      <td>青岛市</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <td>84</td>
+      <td>常德市</td>
+      <td>32</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在gather_customer_order_10_11筛选出销量前十的数据</span></span><br><span class="line">gather_customer_order_10_11_head = gather_customer_order_10_11[gather_customer_order_10_11[<span class="string">&#x27;chinese_city&#x27;</span>].isin(<span class="built_in">list</span>(gather_customer_order_city_head[<span class="string">&#x27;chinese_city&#x27;</span>]))]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gather_customer_order_10_11_head.head(<span class="number">10</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>104692</td>
+      <td>2019-10-01</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华中</td>
+      <td>湖南省</td>
+      <td>常德市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2049.0982</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104695</td>
+      <td>2019-10-01</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>直辖市</td>
+      <td>北京市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104697</td>
+      <td>2019-10-01</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华南</td>
+      <td>广东省</td>
+      <td>深圳市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104699</td>
+      <td>2019-10-01</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>直辖市</td>
+      <td>重庆市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104784</td>
+      <td>2019-10-01</td>
+      <td>Road-150 Red</td>
+      <td>公路自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>直辖市</td>
+      <td>北京市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3578.2700</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104796</td>
+      <td>2019-10-01</td>
+      <td>Road-250 Black</td>
+      <td>公路自行车</td>
+      <td>自行车</td>
+      <td>华中</td>
+      <td>湖北省</td>
+      <td>武汉市</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4624.9125</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104810</td>
+      <td>2019-10-01</td>
+      <td>Road-350-W Yellow</td>
+      <td>公路自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>直辖市</td>
+      <td>上海市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1700.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>104895</td>
+      <td>2019-10-01</td>
+      <td>Touring-1000 Blue</td>
+      <td>旅游自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>直辖市</td>
+      <td>重庆市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2384.0700</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>105082</td>
+      <td>2019-10-02</td>
+      <td>Mountain-200 Silver</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华南</td>
+      <td>浙江省</td>
+      <td>杭州市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2319.9900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+    <tr>
+      <td>105089</td>
+      <td>2019-10-02</td>
+      <td>Mountain-400-W Silver</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>西南</td>
+      <td>直辖市</td>
+      <td>重庆市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>769.4900</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-10</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#分组计算销售量前十城市销售金额 与销售量</span></span><br><span class="line">gather_customer_order_city_10_11 = gather_customer_order_10_11_head.groupby([<span class="string">&#x27;chinese_city&#x27;</span>,<span class="string">&#x27;create_year_month&#x27;</span>]).agg(&#123;<span class="string">&#x27;order_num&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>,<span class="string">&#x27;sum_amount&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>&#125;).reset_index()</span><br><span class="line">gather_customer_order_city_10_11</span><br><span class="line"><span class="comment">#这样已经统计出前十城市销售金额、销售量的总计</span></span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chinese_city</th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+      <th>sum_amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>上海市</td>
+      <td>2019-10</td>
+      <td>62</td>
+      <td>115124.5381</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>上海市</td>
+      <td>2019-11</td>
+      <td>58</td>
+      <td>100811.9199</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>北京市</td>
+      <td>2019-10</td>
+      <td>66</td>
+      <td>130812.5495</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>北京市</td>
+      <td>2019-11</td>
+      <td>79</td>
+      <td>142488.3452</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>常德市</td>
+      <td>2019-10</td>
+      <td>29</td>
+      <td>55208.7835</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>常德市</td>
+      <td>2019-11</td>
+      <td>32</td>
+      <td>63306.9442</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>广州市</td>
+      <td>2019-10</td>
+      <td>40</td>
+      <td>72941.4221</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>广州市</td>
+      <td>2019-11</td>
+      <td>36</td>
+      <td>75395.3028</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>成都市</td>
+      <td>2019-10</td>
+      <td>32</td>
+      <td>55603.0149</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>成都市</td>
+      <td>2019-11</td>
+      <td>34</td>
+      <td>60915.5978</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>杭州市</td>
+      <td>2019-10</td>
+      <td>24</td>
+      <td>48829.6757</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>杭州市</td>
+      <td>2019-11</td>
+      <td>37</td>
+      <td>61418.9224</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>武汉市</td>
+      <td>2019-10</td>
+      <td>30</td>
+      <td>51539.1084</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>武汉市</td>
+      <td>2019-11</td>
+      <td>42</td>
+      <td>89868.7785</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>深圳市</td>
+      <td>2019-10</td>
+      <td>32</td>
+      <td>60065.5231</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>深圳市</td>
+      <td>2019-11</td>
+      <td>38</td>
+      <td>73560.4124</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>重庆市</td>
+      <td>2019-10</td>
+      <td>34</td>
+      <td>54971.3460</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>重庆市</td>
+      <td>2019-11</td>
+      <td>46</td>
+      <td>80254.2431</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>青岛市</td>
+      <td>2019-10</td>
+      <td>19</td>
+      <td>32046.5182</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>青岛市</td>
+      <td>2019-11</td>
+      <td>33</td>
+      <td>59071.7921</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#计算环比 显然还是通过pct_change()函数实线</span></span><br><span class="line">city_top_list = <span class="built_in">list</span>(gather_customer_order_city_head[<span class="string">&#x27;chinese_city&#x27;</span>])</span><br><span class="line">order_top_x = pd.Series([])</span><br><span class="line">amount_top_x = pd.Series([])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> city_top_list:</span><br><span class="line">    <span class="comment">#print(i)</span></span><br><span class="line">    a=gather_customer_order_city_10_11.loc[gather_customer_order_city_10_11[<span class="string">&#x27;chinese_city&#x27;</span>]==i][<span class="string">&#x27;order_num&#x27;</span>].pct_change().fillna(<span class="number">0</span>)</span><br><span class="line">    b=gather_customer_order_city_10_11.loc[gather_customer_order_city_10_11[<span class="string">&#x27;chinese_city&#x27;</span>]==i][<span class="string">&#x27;sum_amount&#x27;</span>].pct_change().fillna(<span class="number">0</span>)</span><br><span class="line">    order_top_x=order_top_x.append(a)</span><br><span class="line">    amount_top_x = amount_top_x.append(b)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#order_diff销售数量环比，amount_diff销售金额环比</span></span><br><span class="line">gather_customer_order_city_10_11[<span class="string">&#x27;order_diff&#x27;</span>]=order_top_x</span><br><span class="line">gather_customer_order_city_10_11[<span class="string">&#x27;amount_diff&#x27;</span>]=amount_top_x</span><br><span class="line"></span><br><span class="line">gather_customer_order_city_10_11.head(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chinese_city</th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+      <th>sum_amount</th>
+      <th>order_diff</th>
+      <th>amount_diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>上海市</td>
+      <td>2019-10</td>
+      <td>62</td>
+      <td>115124.5381</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>上海市</td>
+      <td>2019-11</td>
+      <td>58</td>
+      <td>100811.9199</td>
+      <td>-0.064516</td>
+      <td>-0.124323</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>北京市</td>
+      <td>2019-10</td>
+      <td>66</td>
+      <td>130812.5495</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>北京市</td>
+      <td>2019-11</td>
+      <td>79</td>
+      <td>142488.3452</td>
+      <td>0.196970</td>
+      <td>0.089256</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>常德市</td>
+      <td>2019-10</td>
+      <td>29</td>
+      <td>55208.7835</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<p><strong>字段注释</strong></p>
+<p>chinese_city：城市，create_year_month：时间，order_num：本月销售数量，sum_amount：本月销售金额，order_diff：本月销售数量环比，</p>
+<p>amount_diff：本月销售金额环比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#存入数据库</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://frogdata05:Frogdata!1321@106.15.121.232:3306/datafrog05_adventure?charset=gbk&#x27;</span>)</span><br><span class="line">datafrog=engine</span><br><span class="line">gather_customer_order_city_10_11.to_sql(<span class="string">&#x27;zjh_pt_bicy_november_october_city_3&#x27;</span>,con = datafrog,if_exists=<span class="string">&#x27;replace&#x27;</span>, index=<span class="literal">False</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/blog/xcode361/source/_posts/自行车业务BI/5.png"></p>
+<h2 id="三、自行车产品销售-表现"><a href="#三、自行车产品销售-表现" class="headerlink" title="三、自行车产品销售 表现"></a>三、自行车产品销售 表现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#前面筛选出自行车销售表 还是使用gather_customer_order表进行分析</span></span><br><span class="line">gather_customer_order.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>146</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>福建省</td>
+      <td>三明市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>河北省</td>
+      <td>衡水市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华南</td>
+      <td>广东省</td>
+      <td>佛山市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>149</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Silver</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>内蒙古自治区</td>
+      <td>呼伦贝尔市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3399.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+    <tr>
+      <td>150</td>
+      <td>2019-01-02</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>东北</td>
+      <td>黑龙江省</td>
+      <td>伊春市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#细分市场销量表现</span></span><br><span class="line"><span class="comment">#求每个月自行车的销售数量</span></span><br><span class="line">gather_customer_order_group_month=gather_customer_order.groupby(<span class="string">&#x27;create_year_month&#x27;</span>).agg(&#123;<span class="string">&#x27;order_num&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>&#125;).reset_index()</span><br><span class="line">gather_customer_order_group_month.head()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-02</td>
+      <td>2735</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-03</td>
+      <td>3086</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-04</td>
+      <td>2995</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-05</td>
+      <td>3213</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#合并自行车销售信息表+自行车每月累计销售数量表，pd.merge</span></span><br><span class="line">order_num_proportion = pd.merge(gather_customer_order, gather_customer_order_group_month, on=<span class="string">&#x27;create_year_month&#x27;</span>)</span><br><span class="line">order_num_proportion.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num_x</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+      <th>order_num_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>福建省</td>
+      <td>三明市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>河北省</td>
+      <td>衡水市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华南</td>
+      <td>广东省</td>
+      <td>佛山市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Silver</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>内蒙古自治区</td>
+      <td>呼伦贝尔市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3399.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01-02</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>东北</td>
+      <td>黑龙江省</td>
+      <td>伊春市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#计算自行车销量/自行车每月销量占比</span></span><br><span class="line">order_num_proportion[<span class="string">&#x27;order_proportion&#x27;</span>] = order_num_proportion[<span class="string">&#x27;order_num_x&#x27;</span>]/order_num_proportion[<span class="string">&#x27;order_num_y&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">order_num_proportion = order_num_proportion.rename(columns = &#123;<span class="string">&#x27;sum_month_order&#x27;</span>:<span class="string">&#x27;order_num_y&#x27;</span>&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">order_num_proportion.head()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_date</th>
+      <th>product_name</th>
+      <th>cpzl_zw</th>
+      <th>cplb_zw</th>
+      <th>chinese_territory</th>
+      <th>chinese_province</th>
+      <th>chinese_city</th>
+      <th>order_num_x</th>
+      <th>customer_num</th>
+      <th>sum_amount</th>
+      <th>is_current_year</th>
+      <th>is_last_year</th>
+      <th>is_yesterday</th>
+      <th>is_today</th>
+      <th>is_current_month</th>
+      <th>is_current_quarter</th>
+      <th>is_21_day</th>
+      <th>create_year_month</th>
+      <th>order_num_y</th>
+      <th>order_proportion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华东</td>
+      <td>福建省</td>
+      <td>三明市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>0.000325</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>河北省</td>
+      <td>衡水市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>0.000325</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华南</td>
+      <td>广东省</td>
+      <td>佛山市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3374.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>0.000325</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01-02</td>
+      <td>Mountain-100 Silver</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>华北</td>
+      <td>内蒙古自治区</td>
+      <td>呼伦贝尔市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3399.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>0.000325</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01-02</td>
+      <td>Mountain-200 Black</td>
+      <td>山地自行车</td>
+      <td>自行车</td>
+      <td>东北</td>
+      <td>黑龙江省</td>
+      <td>伊春市</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2294.99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>3075</td>
+      <td>0.000325</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<p><strong>字段注释</strong></p>
+<p>create_date:时间, product_name：产品名, cpzl_zw：产品类别, cplb_zw：产品大类, order_num_x：产品当天销售数量,customer_num：当天用户购买人数,</p>
+<p>sum_amount：产品当天销售金额, chinese_province:省份, chinese_city：城市, chinese_territory：区域,create_year_month：月份,</p>
+<p>sum_month_order：本月累计销量, order_proportion：产品销量占比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将每月自行车销售信息存入数据库</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://frogdata05:Frogdata!1321@106.15.121.232:3306/datafrog05_adventure?charset=gbk&#x27;</span>)</span><br><span class="line">datafrog=engine</span><br><span class="line">order_num_proportion.to_sql(<span class="string">&#x27;zjh_pt_bicycle_product_sales_month_4&#x27;</span>,con = datafrog,if_exists=<span class="string">&#x27;replace&#x27;</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-2公路、山地、旅游自行车细分市场表现"><a href="#3-2公路、山地、旅游自行车细分市场表现" class="headerlink" title="3.2公路、山地、旅游自行车细分市场表现"></a>3.2公路、山地、旅游自行车细分市场表现</h1><h3 id="3-2-1-公路自行车"><a href="#3-2-1-公路自行车" class="headerlink" title="3.2.1 公路自行车"></a>3.2.1 公路自行车</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看有自行车有哪些产品子类</span></span><br><span class="line">gather_customer_order[<span class="string">&#x27;cpzl_zw&#x27;</span>].drop_duplicates()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">146    山地自行车</span><br><span class="line">236    公路自行车</span><br><span class="line">372    旅游自行车</span><br><span class="line">Name: cpzl_zw, dtype: object</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#筛选出公路自行车</span></span><br><span class="line">gather_customer_order_road = gather_customer_order[gather_customer_order[<span class="string">&#x27;cpzl_zw&#x27;</span>] == <span class="string">&#x27;公路自行车&#x27;</span>]</span><br><span class="line"><span class="comment">#求公路自行车不同型号的产品销售量</span></span><br><span class="line">gather_customer_order_road_month = gather_customer_order_road.groupby(by = [<span class="string">&#x27;create_year_month&#x27;</span>,<span class="string">&#x27;product_name&#x27;</span>]).order_num.<span class="built_in">sum</span>().reset_index()</span><br><span class="line">gather_customer_order_road_month[<span class="string">&#x27;cpzl_zw&#x27;</span>] = <span class="string">&#x27;公路自行车&#x27;</span></span><br><span class="line">gather_customer_order_road_month <span class="comment">#分组统计后的结果</span></span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>product_name</th>
+      <th>order_num</th>
+      <th>cpzl_zw</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>Road-150 Red</td>
+      <td>304</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01</td>
+      <td>Road-250 Black</td>
+      <td>257</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01</td>
+      <td>Road-250 Red</td>
+      <td>145</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01</td>
+      <td>Road-350-W Yellow</td>
+      <td>202</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01</td>
+      <td>Road-550-W Yellow</td>
+      <td>279</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>171</td>
+      <td>2020-10</td>
+      <td>Road-350-W Yellow</td>
+      <td>91</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>172</td>
+      <td>2020-10</td>
+      <td>Road-550-W Yellow</td>
+      <td>164</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>173</td>
+      <td>2020-10</td>
+      <td>Road-650 Black</td>
+      <td>43</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>174</td>
+      <td>2020-10</td>
+      <td>Road-650 Red</td>
+      <td>41</td>
+      <td>公路自行车</td>
+    </tr>
+    <tr>
+      <td>175</td>
+      <td>2020-10</td>
+      <td>Road-750 Black</td>
+      <td>105</td>
+      <td>公路自行车</td>
+    </tr>
+  </tbody>
+</table>
+<p>176 rows × 4 columns</p>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计每个月公路自行车销售数量</span></span><br><span class="line">gather_customer_order_road_month_sum = gather_customer_order_road_month.groupby(<span class="string">&#x27;create_year_month&#x27;</span>).order_num.<span class="built_in">sum</span>().reset_index()</span><br><span class="line">gather_customer_order_road_month_sum.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>order_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-02</td>
+      <td>1458</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-03</td>
+      <td>1643</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-04</td>
+      <td>1567</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-05</td>
+      <td>1718</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#合并不同产品自行车每月销售数量表、每月销售数量表</span></span><br><span class="line">gather_customer_order_road_month = pd.merge(gather_customer_order_road_month,gather_customer_order_road_month_sum,on=<span class="string">&#x27;create_year_month&#x27;</span>)</span><br><span class="line">gather_customer_order_road_month.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>product_name</th>
+      <th>order_num_x</th>
+      <th>cpzl_zw</th>
+      <th>order_num_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>Road-150 Red</td>
+      <td>304</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01</td>
+      <td>Road-250 Black</td>
+      <td>257</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01</td>
+      <td>Road-250 Red</td>
+      <td>145</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01</td>
+      <td>Road-350-W Yellow</td>
+      <td>202</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01</td>
+      <td>Road-550-W Yellow</td>
+      <td>279</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<h3 id="3-2-2-山地自行车"><a href="#3-2-2-山地自行车" class="headerlink" title="3.2.2 山地自行车"></a>3.2.2 山地自行车</h3><p>山地自行车同样进行如此的处理，与公路自行车处理过程一致，赋予变量gather_customer_order_Mountain筛选山地自行车→求山地自行车不同型号的产品销售数量→求每月累计销售数量→合并→目的是用于产品子类比较环比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gather_customer_order_Mountain = gather_customer_order[gather_customer_order[<span class="string">&#x27;cpzl_zw&#x27;</span>] == <span class="string">&#x27;山地自行车&#x27;</span>]</span><br><span class="line"><span class="comment">#求山地自行车不同型号产品销售数量</span></span><br><span class="line">gather_customer_order_Mountain_month = gather_customer_order_Mountain.groupby(by = [<span class="string">&#x27;create_year_month&#x27;</span>,<span class="string">&#x27;product_name&#x27;</span>]).order_num.<span class="built_in">sum</span>().reset_index()</span><br><span class="line">gather_customer_order_Mountain_month[<span class="string">&#x27;cpzl_zw&#x27;</span>] = <span class="string">&#x27;山地自行车&#x27;</span></span><br><span class="line"><span class="comment">#每个月公路自行车累计销售数量</span></span><br><span class="line">gather_customer_order_Mountain_month_sum = gather_customer_order_Mountain_month.groupby(<span class="string">&#x27;create_year_month&#x27;</span>).order_num.<span class="built_in">sum</span>().reset_index()</span><br><span class="line"><span class="comment">#合并山地自行车hz_customer_order_Mountain_month与每月累计销售数量</span></span><br><span class="line"><span class="comment">#用于计算不同型号产品的占比</span></span><br><span class="line">gather_customer_order_Mountain_month = pd.merge(gather_customer_order_Mountain_month,gather_customer_order_Mountain_month_sum,on=<span class="string">&#x27;create_year_month&#x27;</span>)</span><br><span class="line">gather_customer_order_Mountain_month.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>product_name</th>
+      <th>order_num_x</th>
+      <th>cpzl_zw</th>
+      <th>order_num_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>Mountain-100 Black</td>
+      <td>43</td>
+      <td>山地自行车</td>
+      <td>964</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01</td>
+      <td>Mountain-100 Silver</td>
+      <td>32</td>
+      <td>山地自行车</td>
+      <td>964</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01</td>
+      <td>Mountain-200 Black</td>
+      <td>343</td>
+      <td>山地自行车</td>
+      <td>964</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01</td>
+      <td>Mountain-200 Silver</td>
+      <td>320</td>
+      <td>山地自行车</td>
+      <td>964</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01</td>
+      <td>Mountain-400-W Silver</td>
+      <td>131</td>
+      <td>山地自行车</td>
+      <td>964</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<h3 id="3-2-3旅游自行车"><a href="#3-2-3旅游自行车" class="headerlink" title="3.2.3旅游自行车"></a>3.2.3旅游自行车</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gather_customer_order_tour = gather_customer_order[gather_customer_order[<span class="string">&#x27;cpzl_zw&#x27;</span>] == <span class="string">&#x27;旅游自行车&#x27;</span>]</span><br><span class="line">gather_customer_order_tour_month = gather_customer_order_tour.groupby(by = [<span class="string">&#x27;create_year_month&#x27;</span>,<span class="string">&#x27;product_name&#x27;</span>]).order_num.<span class="built_in">sum</span>().reset_index()</span><br><span class="line">gather_customer_order_tour_month[<span class="string">&#x27;cpzl_zw&#x27;</span>] = <span class="string">&#x27;旅游自行车&#x27;</span></span><br><span class="line">gather_customer_order_tour_month_sum = gather_customer_order_tour_month.groupby(<span class="string">&#x27;create_year_month&#x27;</span>).order_num.<span class="built_in">sum</span>().reset_index()</span><br><span class="line">gather_customer_order_tour_month = pd.merge(gather_customer_order_tour_month,gather_customer_order_tour_month_sum,on=<span class="string">&#x27;create_year_month&#x27;</span>)</span><br><span class="line">gather_customer_order_tour_month.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>product_name</th>
+      <th>order_num_x</th>
+      <th>cpzl_zw</th>
+      <th>order_num_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>Touring-1000 Blue</td>
+      <td>117</td>
+      <td>旅游自行车</td>
+      <td>453</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01</td>
+      <td>Touring-1000 Yellow</td>
+      <td>133</td>
+      <td>旅游自行车</td>
+      <td>453</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01</td>
+      <td>Touring-2000 Blue</td>
+      <td>87</td>
+      <td>旅游自行车</td>
+      <td>453</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01</td>
+      <td>Touring-3000 Blue</td>
+      <td>65</td>
+      <td>旅游自行车</td>
+      <td>453</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01</td>
+      <td>Touring-3000 Yellow</td>
+      <td>51</td>
+      <td>旅游自行车</td>
+      <td>453</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h3 id="3-2-4-汇总"><a href="#3-2-4-汇总" class="headerlink" title="3.2.4 汇总"></a>3.2.4 汇总</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将山地自行车、旅游自行车、公路自行车每月销量信息合并</span></span><br><span class="line">gather_customer_order_month = pd.concat([gather_customer_order_road_month,gather_customer_order_Mountain_month,gather_customer_order_tour_month])</span><br><span class="line">gather_customer_order_month</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>product_name</th>
+      <th>order_num_x</th>
+      <th>cpzl_zw</th>
+      <th>order_num_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>Road-150 Red</td>
+      <td>304</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01</td>
+      <td>Road-250 Black</td>
+      <td>257</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01</td>
+      <td>Road-250 Red</td>
+      <td>145</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01</td>
+      <td>Road-350-W Yellow</td>
+      <td>202</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01</td>
+      <td>Road-550-W Yellow</td>
+      <td>279</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>2020-10</td>
+      <td>Touring-1000 Blue</td>
+      <td>46</td>
+      <td>旅游自行车</td>
+      <td>168</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>2020-10</td>
+      <td>Touring-1000 Yellow</td>
+      <td>38</td>
+      <td>旅游自行车</td>
+      <td>168</td>
+    </tr>
+    <tr>
+      <td>107</td>
+      <td>2020-10</td>
+      <td>Touring-2000 Blue</td>
+      <td>39</td>
+      <td>旅游自行车</td>
+      <td>168</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>2020-10</td>
+      <td>Touring-3000 Blue</td>
+      <td>14</td>
+      <td>旅游自行车</td>
+      <td>168</td>
+    </tr>
+    <tr>
+      <td>109</td>
+      <td>2020-10</td>
+      <td>Touring-3000 Yellow</td>
+      <td>31</td>
+      <td>旅游自行车</td>
+      <td>168</td>
+    </tr>
+  </tbody>
+</table>
+<p>440 rows × 5 columns</p>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#order_num_x是每个产品、每个月的销售量，order_num_y是这个类别自行车每月销售量</span></span><br><span class="line"><span class="comment">#两者相除就是每月 不同产品占比情况</span></span><br><span class="line">gather_customer_order_month[<span class="string">&#x27;order_num_proportio&#x27;</span>] = gather_customer_order_month[<span class="string">&#x27;order_num_x&#x27;</span>]/gather_customer_order_month[<span class="string">&#x27;order_num_y&#x27;</span>]</span><br><span class="line"><span class="comment">#order_month_product当月产品累计销量</span></span><br><span class="line"><span class="comment">#sum_order_month当月自行车总销量</span></span><br><span class="line">gather_customer_order_month.rename(columns = &#123;<span class="string">&#x27;order_num_x&#x27;</span>:<span class="string">&#x27;order_month_product&#x27;</span>,<span class="string">&#x27;order_num_y&#x27;</span>:<span class="string">&#x27;sum_order_month&#x27;</span>&#125;,inplace = <span class="literal">True</span>)</span><br><span class="line">gather_customer_order_month.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>create_year_month</th>
+      <th>product_name</th>
+      <th>order_month_product</th>
+      <th>cpzl_zw</th>
+      <th>sum_order_month</th>
+      <th>order_num_proportio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2019-01</td>
+      <td>Road-150 Red</td>
+      <td>304</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+      <td>0.183353</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2019-01</td>
+      <td>Road-250 Black</td>
+      <td>257</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+      <td>0.155006</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2019-01</td>
+      <td>Road-250 Red</td>
+      <td>145</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+      <td>0.087455</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2019-01</td>
+      <td>Road-350-W Yellow</td>
+      <td>202</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+      <td>0.121834</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2019-01</td>
+      <td>Road-550-W Yellow</td>
+      <td>279</td>
+      <td>公路自行车</td>
+      <td>1658</td>
+      <td>0.168275</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<p>字段注释：</p>
+<p>create_year_month：时间，product_name：产品名，order_month_product：本月产品累计销量，sum_order_month：当月自行车总销量，</p>
+<p>order_num_proportio：本月产品销量占比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#写入数据库</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://frogdata05:Frogdata!1321@106.15.121.232:3306/datafrog05_adventure?charset=gbk&#x27;</span>)</span><br><span class="line">gather_customer_order_month.to_sql(<span class="string">&#x27;zjh_pt_bicycle_product_sales_order_month_4&#x27;</span>,con = engine,if_exists=<span class="string">&#x27;replace&#x27;</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>郑嘉晖
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xcode361.github.io/2021/03/27/%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1BI/" title="">https://xcode361.github.io/2021/03/27/自行车业务BI/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/23/linux/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/27/%E9%93%B6%E8%A1%8C%E8%B4%B7%E6%AC%BE%E6%A3%80%E6%B5%8B/" rel="next" title="银行贷款检测">
+      银行贷款检测 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">一 项目背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E5%88%86%E6%9E%90%E7%9B%AE%E7%9A%84"><span class="nav-number">2.</span> <span class="nav-text">二 分析目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E6%95%B0%E6%8D%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">三 数据介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019%E5%B9%B411%E6%9C%88%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%B8%9A%E5%8A%A1%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A"><span class="nav-number">3.1.</span> <span class="nav-text">2019年11月自行车业务分析报告</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%87%AA%E8%A1%8C%E8%BD%A6%E6%95%B4%E4%BD%93%E9%94%80%E5%94%AE%E8%A1%A8%E7%8E%B0"><span class="nav-number">3.1.1.</span> <span class="nav-text">一、自行车整体销售表现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E9%94%80%E5%94%AE%E9%87%8F%E7%8E%AF%E6%AF%94"><span class="nav-number">3.1.2.</span> <span class="nav-text">计算销售量环比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3-%E7%94%A8%E6%9D%A5%E9%94%99%E4%BD%8D%E7%9B%B8%E5%87%8F"><span class="nav-number">3.1.3.</span> <span class="nav-text">diff函数详解 用来错位相减</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E9%94%80%E5%94%AE%E9%A2%9D%E7%8E%AF%E6%AF%94"><span class="nav-number">3.1.4.</span> <span class="nav-text">计算销售额环比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9C%B0%E5%9F%9F%E9%94%80%E5%94%AE%E8%A1%A8%E7%8E%B0"><span class="nav-number">3.2.</span> <span class="nav-text">二、地域销售表现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-TOP10%E9%94%80%E5%94%AE%E9%87%8F%E5%9F%8E%E5%B8%82%E7%8E%AF%E6%AF%94%E6%83%85%E5%86%B5"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2 TOP10销售量城市环比情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%87%AA%E8%A1%8C%E8%BD%A6%E4%BA%A7%E5%93%81%E9%94%80%E5%94%AE-%E8%A1%A8%E7%8E%B0"><span class="nav-number">3.3.</span> <span class="nav-text">三、自行车产品销售 表现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-2%E5%85%AC%E8%B7%AF%E3%80%81%E5%B1%B1%E5%9C%B0%E3%80%81%E6%97%85%E6%B8%B8%E8%87%AA%E8%A1%8C%E8%BD%A6%E7%BB%86%E5%88%86%E5%B8%82%E5%9C%BA%E8%A1%A8%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">3.2公路、山地、旅游自行车细分市场表现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E5%85%AC%E8%B7%AF%E8%87%AA%E8%A1%8C%E8%BD%A6"><span class="nav-number">4.0.1.</span> <span class="nav-text">3.2.1 公路自行车</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E5%B1%B1%E5%9C%B0%E8%87%AA%E8%A1%8C%E8%BD%A6"><span class="nav-number">4.0.2.</span> <span class="nav-text">3.2.2 山地自行车</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3%E6%97%85%E6%B8%B8%E8%87%AA%E8%A1%8C%E8%BD%A6"><span class="nav-number">4.0.3.</span> <span class="nav-text">3.2.3旅游自行车</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-%E6%B1%87%E6%80%BB"><span class="nav-number">4.0.4.</span> <span class="nav-text">3.2.4 汇总</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="郑嘉晖"
+      src="/images/author.jpg">
+  <p class="site-author-name" itemprop="name">郑嘉晖</p>
+  <div class="site-description" itemprop="description">不断进步</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xcode361" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xcode361" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/819119351@qq.com" title="E-Mail → 819119351@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">郑嘉晖</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
